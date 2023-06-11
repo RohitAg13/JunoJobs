@@ -31,8 +31,8 @@ def _fetch_latest_for_source(source):
             }}
         ],
         "query": {
-            "match": {
-                "source": source
+            "match_phrase": {
+                    "source":source
             }
         }
     }
@@ -60,7 +60,6 @@ def index(request):
                 'desc': source,
                 'items': items
             })
-    print(context['sources'])
     return render(request, 'rss/index.html', context)
 
 
