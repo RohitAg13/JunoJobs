@@ -54,10 +54,13 @@ def index(request):
     for source in sources:
         if 'show_in_homepage' not in source:
             source['show_in_homepage'] = True
-        context['sources'].append({
-            'desc': source,
-            'items': _fetch_latest_for_source(source['name'])
-        })
+        items = _fetch_latest_for_source(source['name'])
+        if items:
+            context['sources'].append({
+                'desc': source,
+                'items': items
+            })
+    print(context['sources'])
     return render(request, 'rss/index.html', context)
 
 
