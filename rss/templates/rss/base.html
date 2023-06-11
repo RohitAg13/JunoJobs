@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Yolo India - {% block title %}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock %}" />
+
+    {% include "rss/head.html" %}
+  </head>
+
+  <body>
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">About</h4>
+              <p class="text-muted">
+                Yolo is helping students find job opportunites.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar back shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="/" class="navbar-brand d-flex align-items-center">
+            <span class="logo">Yolo India</span>
+            <blink
+              class="blink"
+              style="color: #00AA48; font-size: 32px; font-family: SansSerif"
+              >&nbsp;▒</blink
+            >
+          </a>
+          {% include "rss/nav.html" %}
+        </div>
+      </div>
+    </header>
+
+    {% block content %}{% endblock %}
+  </body>
+</html>

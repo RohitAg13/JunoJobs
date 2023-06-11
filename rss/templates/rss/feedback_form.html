@@ -1,0 +1,31 @@
+{% extends "rss/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Feedback Page{% endblock %}
+{% block description %}Send some feedback to the website administrator.{% endblock %}
+
+{% block content %}
+
+    <div class="container py-5 col-12">
+        <div class="row justify-content-center">
+            <h3>Tell us anything.</h3>
+
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12" style="text-align: center">
+                If you want to propose a new data source, please copy-paste <br/>the URL for the RSS/JSON in the message.<br/>
+                For bug-fixes you might want to <a href="https://yolo-india.com/yolo/hugs-n-bugs">raise an issue on Yolo community</a>.<br/>
+                You can also write to <a href="mailto:madudeyo@gmail.com">madudeyo@gmail.com</a>
+
+            </div>
+        </div>
+        <div class="row py-5 justify-content-center">
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-outline-secondary" type="submit" value="Submit Feedback"/>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

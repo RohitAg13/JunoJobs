@@ -1,0 +1,9 @@
+<form action="/search/" method="get">
+    <div class="form-group">
+        <input  class="form-control search-bar"
+                onkeypress="noenter()" type="text" id="q" name="q"
+                placeholder="Search: Python AND (Bengaluru OR Remote)"
+                required="required"
+                {% if q %}value="{{ q }}"{% endif %}>
+    </div>
+</form>

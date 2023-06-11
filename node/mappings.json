@@ -1,0 +1,29 @@
+{
+  "item": {
+    "properties": {
+      "title": {
+        "type": "text",
+        "analyzer": "english"
+      },
+      "body": {
+        "type": "text",
+        "analyzer": "english"
+      },
+      "body_html": {
+        "type": "keyword"
+      },
+      "category": {
+        "type": "keyword"
+      },
+      "link": {
+        "type": "keyword"
+      },
+      "pubDate": {
+        "type": "date"
+      },
+      "source": {
+        "type": "keyword"
+      }
+    }
+  }
+}

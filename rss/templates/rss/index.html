@@ -1,0 +1,44 @@
+{% extends "rss/base.html" %}
+
+{% block description %}Yolo Jobs Search Engine. Find Fresh Jobs from all over the world, updated everyday.{% endblock %}
+{% block title %}Yolo Jobs Search Engine.{% endblock %}
+
+{% block content %}
+
+    <main role="main">
+        <div class="album py-5 ">
+            <div class="container">
+                <div class="form-group">
+                    <h3> <a href="https://yolo-india.com">Yolo's</a>
+                        database of jobs from all over the world. Updated everyday.</h3>
+
+                    {% include "rss/search_bar.html" %}
+                </div>
+            </div>
+        </div>
+
+        <div class="container clearfix">
+            {% for source in sources %}
+                {% if source.desc.show_in_homepage %}
+                    <div class="float-left news-box">
+                        <div>
+                            <span class="news-box-title">{{ source.desc.name }}</span>
+
+                            {% if source.desc.category == 'remote-jobs' %}
+                                <span class="badge badge-secondary">REMOTE</span>
+                            {% endif %}
+                        </div>
+                        <ul>
+                            {% for item in source.items %}
+                                <li>
+                                    <a href="/job/{{ item.title|slugify }}/?id={{ item.meta.id|urlencode }}">{{ item.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </main>
+
+{% endblock %}

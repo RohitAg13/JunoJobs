@@ -1,0 +1,93 @@
+[
+  {
+    "name": "Python.org Jobs",
+    "url": "https://www.python.org/jobs/feed/rss/",
+    "category": "lang-jobs"
+  },
+  {
+    "name": "Django Jobs",
+    "url": "https://djangogigs.com/feeds/gigs/",
+    "category": "framework-jobs"
+  },
+  {
+    "name": "RoR Jobs",
+    "url": "https://www.rorjobs.com/jobs.rss",
+    "category": "framework-jobs"
+  },
+  {
+    "name": "Drupal Jobs",
+    "url": "https://jobs.drupal.org/all-jobs/feed",
+    "category": "framework-jobs"
+  },
+  {
+    "name": "RemoteOk",
+    "url": "https://remoteok.io/remote-jobs.rss",
+    "category": "remote-jobs"
+  },
+  {
+    "name": "FOSS Jobs",
+    "url": "https://www.fossjobs.net/rss/all/",
+    "category": "jobs"
+  },
+  {
+    "name": "RemotePython.com",
+    "url": "https://www.remotepython.com/latest/jobs/feed/",
+    "category": "remote-jobs"
+  },
+  {
+    "name": "Dribbble",
+    "url": "https://dribbble.com/jobs.rss?anywhere=true&amp;location=Anywhere",
+    "category": "jobs"
+  },
+  {
+    "name": "Freelancer",
+    "url": "https://www.freelancer.com/rss.xml",
+    "category": "jobs"
+  },
+  {
+    "name": "Golang / Go Jobs",
+    "url": "https://www.golangprojects.com/rss.xml",
+    "category": "jobs"
+  },
+  {
+    "name": "Jobspresso",
+    "url": "https://jobspresso.co/feed/?post_type=job_listing",
+    "category": "jobs"
+  },
+  {
+    "name": "Krop",
+    "url": "http://www.krop.com/services/feeds/rss/latest/",
+    "category": "jobs"
+  },
+  {
+    "name": "Lara Jobs",
+    "url": "https://larajobs.com/feed",
+    "category": "jobs"
+  },
+  {
+    "name": "Mashable Jobs",
+    "url": "http://jobs.mashable.com/jobs/search/results?format=rss",
+    "category": "jobs"
+  },
+  {
+    "name": "NTEN",
+    "url": "https://www.nten.org/feed/?post_type=job",
+    "category": "jobs"
+  },
+  {
+    "name": "Berlin Startup Jobs",
+    "url": "http://berlinstartupjobs.com/feed/",
+    "category": "jobs"
+  },
+  {
+    "name": "WordPress Jobs",
+    "url": "https://jobs.wordpress.net/feed/",
+    "category": "jobs"
+  },
+  {
+    "name": "Landing.jobs",
+    "url": "https://landing.jobs/feed?remote=true",
+    "category": "remote-jobs",
+    "show_in_homepage": false
+  }
+]

@@ -1,0 +1,14 @@
+{% extends "rss/base.html" %}
+
+{% block content %}
+    <main role="main" class="container">
+        <div class="row py-4">
+            <div class="col-10">
+                {% include "rss/search_bar.html" %}
+            </div>
+        </div>
+        <div class="row">
+            {% include "rss/body_html.html" %}
+        </div>
+    </main>
+{% endblock %}
