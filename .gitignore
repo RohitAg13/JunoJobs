@@ -14,3 +14,4 @@ settings.py
 my_dev_settings.py
 *.rdb
 .htpasswd
+TODO.md

@@ -89,5 +89,35 @@
     "url": "https://landing.jobs/feed?remote=true",
     "category": "remote-jobs",
     "show_in_homepage": false
+  },
+  {
+    "name": "Authentic Jobs",
+    "url": "https://authenticjobs.com/?feed=job_feed&job_types=freelance%2Cfull-time%2Cinternship%2Cpart-time&search_location=remote&job_categories&search_keywords",
+    "category": "remote-jobs"
+  },
+  {
+    "name": "Clojure Jobs",
+    "url": "https://clojurejobboard.com/rss.xml",
+    "category": "lang-jobs"
+  },
+  {
+    "name": "Coroflot",
+    "url": "http://feeds.feedburner.com/coroflot/AllJobs",
+    "category": "jobs"
+  },
+  {
+    "name": "HasJob",
+    "url": "https://hasjob.co/feed",
+    "category": "jobs"
+  },
+  {
+    "name": "WeWorkRemotely",
+    "url": "https://weworkremotely.com/remote-jobs.rss",
+    "category": "remote-jobs"
+  },
+  {
+    "name": "Vue Jobs",
+    "url": "https://vuejobs.com/feed",
+    "category": "framework-jobs"
   }
 ]

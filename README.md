@@ -3,7 +3,7 @@ Caerus is a RSS/JSON aggregator and search-engine for Jobs/.
 
 The website is based on Python/Django and ElasticSearch, while the live data is ingested via NodeJS.
 
-[<kbd><img src="imgs/screenshot.jpeg" width="600"></kbd>](https://jobs.yolo-india.com)
+[<kbd><img src="./imgs/screenshot.jpeg" width="600"></kbd>](https://jobs.yolo-india.com)
 
 ## How to run it (Debian)
 
@@ -107,8 +107,7 @@ You can configure the mappings doing this `PUT` request:
 ```
 
 
-TODO: 
+More resources:
 
 * https://himalayas.app/jobs/rss
-* https://weworkremotely.com/remote-job-rss-feed
 * http://www.hnhiring.me/
