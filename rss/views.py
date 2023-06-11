@@ -16,7 +16,7 @@ from rss.postproc import postproc
 from rss.models import Feedback
 from rss.sources import sources
 
-connections.create_connection()
+connections.create_connection(hosts=['172.26.12.192:9200'])
 ONE_WEEK = 7 * 24 * 60 * 60
 ONE_HOUR = 60 * 60
 

@@ -24,7 +24,7 @@ SECRET_KEY = 'uqd%lj^4ygz#n&2!h(w$bew@#oa3^t^#-8a7wo@iss84qz*q&-'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://jobs.yolo-india.com"]
 
 # Application definition
 

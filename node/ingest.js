@@ -7,7 +7,7 @@ let httpreq = require('./httpreq');
 let rss = new RssParser();
 
 let es = new elasticsearch.Client({
-    host: 'localhost:9200',
+    host: '172.26.12.192:9200',
     // log: 'trace'
 });
 
