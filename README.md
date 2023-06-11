@@ -21,7 +21,6 @@ $ pip3 install -r requirements.txt
 $ docker-compose up -d
 ```
 
-
 #### Setup NodeJS and start ingesting data
 ```
 $ cd node
@@ -34,7 +33,7 @@ The script will try to fetch all the default data sources, you shouldn't get any
 You can set up a cronjob to fetch data every hour.
 Just run `crontab -e` and add a line like this:
 ```
-0 * * * * cd /caerus-path/node/ && yarn run ingest >/dev/null 2>&1
+30 5 * * * cd /home/ubuntu/Caerus/node/ && yarn run ingest >/dev/null 2>&1
 ```
 
 #### Setup and run Django server

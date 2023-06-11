@@ -24,7 +24,7 @@ SECRET_KEY = 'uqd%lj^4ygz#n&2!h(w$bew@#oa3^t^#-8a7wo@iss84qz*q&-'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = ["https://jobs.yolo-india.com"]
+ALLOWED_HOSTS = ["jobs.yolo-india.com"]
 
 # Application definition
 
@@ -119,6 +119,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 STATIC_URL = '/static/'
 
