@@ -110,4 +110,4 @@ You can configure the mappings doing this `PUT` request:
 More resources:
 
 * https://himalayas.app/jobs/rss
-* http://www.hnhiring.me/
+* http://www.hnhiring.me/ - https://hnrss.github.io/#job-feeds
