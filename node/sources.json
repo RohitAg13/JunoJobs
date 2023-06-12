@@ -119,5 +119,20 @@
     "name": "Vue Jobs",
     "url": "https://vuejobs.com/feed",
     "category": "framework-jobs"
+  },
+  {
+    "name": "Himalayas",
+    "url": "https://himalayas.app/jobs/rss",
+    "category": "remote-jobs"
+  },
+  {
+    "name": "HackerNews Who's Hiring",
+    "url": "https://vuejobs.com/feed",
+    "category": "jobs"
+  },
+  {
+    "name": "Indeed",
+    "url": "http://rss.indeed.com/rss",
+    "category": "jobs"
   }
 ]
