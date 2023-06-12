@@ -192,5 +192,5 @@ footer a {
     font-family: 'Avenir Next LT Pro Bold';
     font-style: normal;
     font-weight: normal;
-    src: local('Avenir Next LT Pro Bold'), url('paj/AvenirNextLTPro-Bold.woff') format('woff');
+    src: local('Avenir Next LT Pro Bold'), url('font/Avenir\ Next\ LT\ Pro\ Bold.otf') format('otf');
 }
