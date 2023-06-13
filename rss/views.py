@@ -44,12 +44,9 @@ def _fetch_latest_for_source(source):
 
 @cache_page(ONE_HOUR)
 def index(request):
-    res = _fetch_latest_for_source("GitHub Remote")
-    for hit in res:
-        print(hit.source)
-
     context = {
-        'sources': []
+        'sources': [],
+        'count': 0
     }
     for source in sources:
         if 'show_in_homepage' not in source:
@@ -60,6 +57,10 @@ def index(request):
                 'desc': source,
                 'items': items
             })
+
+    total_jobs = Search(index='rss').count()
+    context['count'] = total_jobs
+
     return render(request, 'rss/index.html', context)
 
 

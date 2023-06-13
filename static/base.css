@@ -5,6 +5,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    line-height: 1.7;
 }
 
 a {
@@ -17,12 +18,23 @@ a {
     /*background-color: #303030;*/
 }
 
-.logo {
+.logo{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    color: inherit;
+    fill: currentColor;
+    display: inline-block;
+    flex: none;
+    width: 200px;
+    height: 40px;
+    top: 4px;
+    position: relative;
     color: #00AA48;
-    line-height: 1;
-    font-family: 'Helvetica';
-    font-size: 32px;
-    font-weight: bold;
 }
 
 main {
