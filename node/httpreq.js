@@ -30,7 +30,7 @@ function httpreq(url) {
               }
         };
         request(params, function (error, res, body) {
-            if (!error && res.statusCode === 200) {
+            if (!error && res.statusCode <= 400) {
                 resolve(body);
             } else {
                 console.error(error);

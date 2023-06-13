@@ -127,12 +127,12 @@
   },
   {
     "name": "HackerNews Who's Hiring",
-    "url": "https://vuejobs.com/feed",
+    "url": "https://hnrss.org/whoishiring/jobs",
     "category": "jobs"
   },
   {
     "name": "Indeed",
-    "url": "http://rss.indeed.com/rss",
+    "url": "https://rss.indeed.com/rss",
     "category": "jobs"
   }
 ]
