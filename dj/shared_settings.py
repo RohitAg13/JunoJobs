@@ -52,10 +52,13 @@ MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
 
 ROOT_URLCONF = 'dj.urls'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 TEMPLATES = [
     {
@@ -119,13 +122,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
-DEV_STATIC = os.path.join(BASE_DIR, 'static')
+# DEV_STATIC = os.path.join(BASE_DIR, 'static')
 
-STATICFILES_DIRS = (
-    DEV_STATIC,
-)
+# STATICFILES_DIRS = (
+#     DEV_STATIC,
+# )
 
 ELASTICSEARCH_DSL = {
     'default': {

@@ -111,3 +111,9 @@ More resources:
 
 * http://www.hnhiring.me/ - https://hnrss.github.io/#job-feeds
 * https://app.remotesome.com/api/user-service/public/jobs/list?perPage=30&page=1
+
+
+#### Deploy:
+```
+gunicorn --bind 0.0.0.0:8000 dj.wsgi --workers 3
+```

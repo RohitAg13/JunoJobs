@@ -84,6 +84,10 @@ async function main() {
             await handleItems(items);
         }
     }));
+    let r = await httpreq("https://hc-ping.com/b2a17a45-f7fe-4d11-ae8a-35b87a0fd4ee").catch(err=>{
+           console.log(`Cannot ping server`);
+           console.error(err);
+    });
 }
 
 main();
