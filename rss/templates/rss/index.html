@@ -22,7 +22,9 @@
                 {% if source.desc.show_in_homepage %}
                     <div class="float-left news-box">
                         <div>
-                            <span class="news-box-title">{{ source.desc.name }}</span>
+                            <span class="news-box-title">
+                                <a href="/source?q={{source.desc.name}}">{{ source.desc.name }}</a>
+                            </span>
 
                             {% if source.desc.category == 'remote-jobs' %}
                                 <span class="badge badge-secondary">REMOTE</span>

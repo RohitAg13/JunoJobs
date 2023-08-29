@@ -142,6 +142,48 @@ def data_sources(request):
     return render(request, 'rss/data_sources.html', {'sources_json': sources_json})
 
 
+def source_specific(request):
+    q = request.GET.get('q', '')
+    SIZE =50
+    _from = int(request.GET.get('from', 0))
+    query = Search(index='rss', doc_type='item')
+    query_body = {
+        "size": SIZE,
+        "sort": [
+            {"pubDate": {
+                "unmapped_type": "date",
+                "order": "desc"
+            }}
+        ],
+        "query": {
+            "match_phrase": {
+                "source":q
+            }
+        }
+    }
+    query.update_from_dict(query_body)
+    try:
+        res = query.execute()
+    except elasticsearch.RequestError as err:
+        json_error = json.dumps(err.info['error']['root_cause'], indent=4)
+        return render(request, 'rss/search_error.html', {
+            'json_error': json_error,
+            'q': q
+        })
+    _convert_dates(res.hits)
+    total_hits = res['hits']['total']['value']
+    context = {
+        'q': q,
+        'hits': res.hits,
+        'total_hits': total_hits,
+        'has_prev': _from != 0,
+        'has_next': (total_hits - _from - SIZE) > 0,
+        'prev': _from - SIZE,
+        'next': _from + SIZE,
+        'page_num': (math.floor(_from / SIZE) + 1),
+    }
+    return render(request, 'rss/source.html', context)
+
 class FeedbackCreate(CreateView):
     model = Feedback
     fields = ['sender_email', 'message']
