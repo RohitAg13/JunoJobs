@@ -3,11 +3,12 @@ let RssParser = require('rss-parser');
 let sources = require('./sources');
 let preproc = require('./preproc');
 let httpreq = require('./httpreq');
+const { Cron } = require("croner");
 
 let rss = new RssParser();
 
 let es = new elasticsearch.Client({
-    host: '172.26.12.192:9200',
+    host: 'localhost:9200',
     // log: 'trace'
 });
 
@@ -90,4 +91,8 @@ async function main() {
     });
 }
 
-main();
+const job = Cron('* 30 11 * * *', () => {
+	const date = new Date();
+	console.log("Running Scrapper on: ',date);
+	main();
+});

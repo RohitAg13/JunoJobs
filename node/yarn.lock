@@ -91,6 +91,11 @@ core-util-is@1.0.2:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha512-3lqz5YjWTYnW6dlDa5TLaTCcShfar1e40rmcJVwCBJC6mWlFuj0eCHIElmG1g5kyuJ/GD+8Wn4FFCcz4gJPfaQ==
 
+croner@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/croner/-/croner-7.0.1.tgz#26636f11a40c7f1e92ee2e682730e42d5993e6c2"
+  integrity sha512-G2w4l4ZRwvfUBSUaBXqOS0xtsHpIGsROuOYqLxkV9VWfU7O6ZRuEncvxx08a8vAbKVc3WFD3/rxIFBGfg6Sbww==
+
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"

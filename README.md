@@ -117,3 +117,8 @@ More resources:
 ```
 gunicorn --bind 0.0.0.0:8000 dj.wsgi --workers 3
 ```
+On another tab:
+```
+cd node
+node ingest.js
+```
