@@ -7,11 +7,6 @@ const { Cron } = require("croner");
 
 let rss = new RssParser();
 
-let es = new elasticsearch.Client({
-    host: 'localhost:9200',
-    // log: 'trace'
-});
-
 
 function defaultItemToDoc(item) {
     return {

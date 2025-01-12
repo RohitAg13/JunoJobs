@@ -1,10 +1,6 @@
-let elasticsearch = require('elasticsearch');
+let es = require('./es-client');
 let fs = require('fs');
 
-let es = new elasticsearch.Client({
-    host: 'localhost:9200',
-    log: 'trace'
-});
 
 
 let body = JSON.parse(fs.readFileSync('./mappings.json'));
