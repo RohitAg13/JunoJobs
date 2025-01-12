@@ -88,6 +88,6 @@ async function main() {
 
 const job = Cron('* 30 11 * * *', () => {
 	const date = new Date();
-	console.log("Running Scrapper on: ',date);
+	console.log("Running Scrapper on: ", date);
 	main();
 });
