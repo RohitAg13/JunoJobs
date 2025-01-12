@@ -10,8 +10,12 @@ services:
       - "8000:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=dj.settings
+      - DJANGO_DEBUG=False
+      - MEMCACHED_HOST=memcached
+      - ELASTICSEARCH_HOST=elasticsearch
     depends_on:
       - elasticsearch
+      - memcached
     networks:
       - elasticnet
 
@@ -45,6 +49,14 @@ services:
 volumes:
   esdata:
     driver: local
+
+  memcached:
+    image: memcached:1.6-alpine
+    ports:
+      - "11211:11211"
+    networks:
+      - elasticnet
+    command: memcached -m 64
 
 networks:
   elasticnet: {}
