@@ -1,11 +1,6 @@
 let express = require('express');
 let app = express();
-let elasticsearch = require('elasticsearch');
-
-let es = new elasticsearch.Client({
-    host: 'localhost:9200',
-    log: 'trace'
-});
+let es = require('./es-client');
 
 app.get('/search/:q', function (req, res, next) {
     if(!req.params.q) {

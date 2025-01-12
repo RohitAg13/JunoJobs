@@ -1,4 +1,4 @@
-let elasticsearch = require('elasticsearch');
+let es = require('./es-client');
 let RssParser = require('rss-parser');
 let sources = require('./sources');
 let preproc = require('./preproc');
