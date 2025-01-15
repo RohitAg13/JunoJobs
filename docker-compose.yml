@@ -42,7 +42,7 @@ services:
     networks:
       - elasticnet
     volumes:
-      - esdata:/usr/share/elasticsearch/data
+      - elasticsearch_data:/usr/share/elasticsearch/data
   kibana:
     image: docker.elastic.co/kibana/kibana:7.14.0
     environment:
@@ -67,7 +67,7 @@ services:
 
 
 volumes:
-  esdata:
+  elasticsearch_data:
     driver: local
 
 networks:
