@@ -19,6 +19,17 @@ services:
     networks:
       - elasticnet
 
+  cron:
+    image: alpine:latest
+    volumes:
+      - ./node:/node
+    working_dir: /node
+    entrypoint: /bin/sh -c "apk add --no-cache nodejs npm && npm install && echo '*/30 * * * * node ingest.js' > /etc/crontabs/root && crond -f"
+    depends_on:
+      - elasticsearch
+    networks:
+      - elasticnet
+
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
     environment:
