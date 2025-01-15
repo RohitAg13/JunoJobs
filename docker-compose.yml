@@ -46,10 +46,6 @@ services:
     depends_on:
       - elasticsearch
 
-volumes:
-  esdata:
-    driver: local
-
   memcached:
     image: memcached:1.6-alpine
     ports:
@@ -57,6 +53,11 @@ volumes:
     networks:
       - elasticnet
     command: memcached -m 64
+
+
+volumes:
+  esdata:
+    driver: local
 
 networks:
   elasticnet: {}
