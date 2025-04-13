@@ -108,7 +108,7 @@ async function main() {
 
 main();
 
-const job = Cron("* 30 11 * * *", () => {
+const job = Cron("0 0 * * *", () => {
   const date = new Date();
   console.log("Running Scrapper on: ", date);
   main();
