@@ -8,21 +8,21 @@ import environ
 from pathlib import Path
 
 # Initialize environment variables
-env = environ.Env(
-    DEBUG=(bool, False)
-)
+env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('DJANGO_SECRET_KEY', default="uqd%lj^4ygz#n&2!h(w$bew@#oa3^t^#-8a7wo@iss84qz*q&-")
+SECRET_KEY = env(
+    "DJANGO_SECRET_KEY", default="uqd%lj^4ygz#n&2!h(w$bew@#oa3^t^#-8a7wo@iss84qz*q&-"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DJANGO_DEBUG', default=True)
+DEBUG = env("DJANGO_DEBUG", default=True)
 
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["localhost"])
 
 # Application definition
 INSTALLED_APPS = [
@@ -107,7 +107,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 DEV_STATIC = BASE_DIR / "static"
 STATICFILES_DIRS = [DEV_STATIC]
 

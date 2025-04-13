@@ -1,15 +1,15 @@
-# [jobs.yolo-india.com](https://jobs.yolo-india.com)
+# [jobs.rohitagarwal.dev](https://jobs.rohitagarwal.dev)
 Caerus is a RSS/JSON aggregator and search-engine for Jobs/.
 
 The website is based on Python/Django and ElasticSearch, while the live data is ingested via NodeJS.
 
-[<kbd><img src="./imgs/screenshot.jpeg" width="600"></kbd>](https://jobs.yolo-india.com)
+[<kbd><img src="./imgs/screenshot.jpeg" width="600"></kbd>](https://jobs.rohitagarwal.dev)
 
 ## How to run it (Debian)
 
 #### Create Python Virtual Env
 ```
-$ git clone https://github.com/yolo-india/Caerus.git
+$ git clone https://github.com/rohitag13/Caerus.git
 $ cd 
 $ virtualenv -p python3 venv3
 $ source venv3/bin/activate

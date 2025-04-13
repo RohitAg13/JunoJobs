@@ -24,7 +24,7 @@ services:
     volumes:
       - ./node:/node
     working_dir: /node
-    entrypoint: /bin/sh -c "apk add --no-cache nodejs npm && npm install && echo '*/30 * * * * node ingest.js' > /etc/crontabs/root && crond -f"
+    entrypoint: /bin/sh -c "apk add --no-cache nodejs npm && npm install && echo '*/2 * * * * node /node/ingest.js' > /etc/crontabs/root && crond -f"
     depends_on:
       - elasticsearch
     networks:
@@ -42,7 +42,8 @@ services:
     networks:
       - elasticnet
     volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
+      - es_data:/usr/share/elasticsearch/data
+  
   kibana:
     image: docker.elastic.co/kibana/kibana:7.14.0
     environment:
@@ -56,6 +57,8 @@ services:
       - elasticnet
     depends_on:
       - elasticsearch
+    volumes:
+      - kibana_data:/usr/share/kibana/data
 
   memcached:
     image: memcached:1.6-alpine
@@ -67,7 +70,8 @@ services:
 
 
 volumes:
-  elasticsearch_data:
+  es_data:
+  kibana_data:
     driver: local
 
 networks:

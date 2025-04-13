@@ -16,7 +16,18 @@ from rss.postproc import postproc
 from rss.models import Feedback
 from rss.sources import sources
 
-connections.create_connection(hosts=['172.26.12.192:9200'])
+from elasticsearch.exceptions import NotFoundError
+
+def create_index_if_not_exists(index_name):
+    es = connections.get_connection()
+    try:
+        if not es.indices.exists(index=index_name):
+            es.indices.create(index=index_name)
+    except NotFoundError:
+        es.indices.create(index=index_name)
+
+connections.create_connection(hosts=['localhost:9200'])
+create_index_if_not_exists('rss')
 ONE_WEEK = 7 * 24 * 60 * 60
 ONE_HOUR = 60 * 60
 

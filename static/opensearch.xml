@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-    <ShortName>Yolo India</ShortName>
-    <Description>Yolo's Jobs Open Search Engine</Description>
+    <ShortName>Juno Jobs</ShortName>
+    <Description>Juno Jobs Open Search Engine</Description>
     <Tags>example web</Tags>
     <Contact>madudeyo@gmail.com</Contact>
-    <Image width="16" height="16" type="image/x-icon">https://jobs.yolo-india.com/favicon/favicon.ico</Image>
+    <Image width="16" height="16" type="image/x-icon">https://jobs.rohitagarwal.dev/favicon/favicon.ico</Image>
     <Url type="text/html"
-         template="https://jobs.yolo-india.com/search/?q={searchTerms}"/>
+         template="https://jobs.rohitagarwal.dev/search/?q={searchTerms}"/>
 </OpenSearchDescription>

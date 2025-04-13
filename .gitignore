@@ -10,9 +10,11 @@ venv37
 .DS_Store
 private
 */prod_settings.py
-settings.py
+# settings.py
 my_dev_settings.py
 *.rdb
 .htpasswd
 TODO.md
 jobs.yolo-india.com
+.aider*
+.env
