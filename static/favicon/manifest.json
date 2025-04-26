@@ -1,0 +1,20 @@
+{
+  "name": "Juno Jobs",
+  "short_name": "Juno",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1E293B",
+  "theme_color": "#FBBF24",
+  "icons": [
+    {
+      "src": "/static/favicon/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/favicon/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

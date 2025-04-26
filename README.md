@@ -1,9 +1,9 @@
-# [jobs.rohitagarwal.dev](https://jobs.rohitagarwal.dev)
+# [juno.rohitagarwal.dev](https://juno.rohitagarwal.dev)
 Caerus is a RSS/JSON aggregator and search-engine for Jobs/.
 
 The website is based on Python/Django and ElasticSearch, while the live data is ingested via NodeJS.
 
-[<kbd><img src="./imgs/screenshot.jpeg" width="600"></kbd>](https://jobs.rohitagarwal.dev)
+[<kbd><img src="./imgs/screenshot.jpeg" width="600"></kbd>](https://juno.rohitagarwal.dev)
 
 ## How to run it (Debian)
 
