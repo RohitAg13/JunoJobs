@@ -30,7 +30,7 @@ def create_index_if_not_exists(index_name):
 
 import os
 
-es_host = os.getenv("ELASTICSEARCH_HOST", "localhost")
+es_host = os.getenv("ELASTICSEARCH_HOST", "elasticsearch")
 es_port = os.getenv("ELASTICSEARCH_PORT", "9200")
 connections.create_connection(hosts=[f"{es_host}:{es_port}"])
 create_index_if_not_exists("rss")

@@ -22,7 +22,9 @@ SECRET_KEY = env(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DJANGO_DEBUG", default=True)
 
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["localhost", "juno.rohitagarwal.dev"])
+ALLOWED_HOSTS = env.list(
+    "DJANGO_ALLOWED_HOSTS", default=["localhost", "juno.rohitagarwal.dev"]
+)
 
 # Application definition
 INSTALLED_APPS = [
@@ -115,7 +117,7 @@ STATICFILES_DIRS = [DEV_STATIC]
 # Elasticsearch configuration
 ELASTICSEARCH_DSL = {
     "default": {
-        "hosts": f"{env('ELASTICSEARCH_HOST', default='localhost')}:{env('ELASTICSEARCH_PORT', default='9200')}"
+        "hosts": f"{env('ELASTICSEARCH_HOST', default='elasticsearch')}:{env('ELASTICSEARCH_PORT', default='9200')}"
     }
 }
 
