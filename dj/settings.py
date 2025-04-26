@@ -56,7 +56,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "dj.urls"
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 TEMPLATES = [
     {
