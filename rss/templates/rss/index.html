@@ -31,9 +31,9 @@
         <span class="badge badge-secondary">REMOTE</span>
         {% endif %}
       </div>
-      <ul>
+      <ul class="job-list">
         {% for item in source.items %}
-        <li>
+        <li class="{% if forloop.counter > 5 %}hidden-job{% endif %}">
           <a
             href="/job/{{ item.title|slugify }}/?id={{ item.meta.id|urlencode }}"
             >{{ item.title }}</a
@@ -41,6 +41,11 @@
         </li>
         {% endfor %}
       </ul>
+      {% if source.items and source.items|length > 5 %}
+      <div class="show-more-container">
+        <a href="/source?q={{source.desc.name}}" class="show-more-btn">Show More</a>
+      </div>
+      {% endif %}
     </div>
     {% endif %} {% endfor %}
   </div>
