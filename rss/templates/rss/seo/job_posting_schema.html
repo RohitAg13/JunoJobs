@@ -1,0 +1,24 @@
+{% load static %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "JobPosting",
+  "title": "{{ hit.title }}",
+  "description": "{{ hit.body|striptags|truncatechars:5000 }}",
+  "datePosted": "{{ hit.pubDate|date:'Y-m-d' }}",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "{{ hit.source }}",
+    "sameAs": "{{ hit.link }}"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "US"
+    }
+  },
+  "employmentType": "FULL_TIME",
+  "url": "{{ request.build_absolute_uri }}"
+}
+</script>

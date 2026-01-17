@@ -1,0 +1,125 @@
+<!-- Filter Sidebar Component -->
+<div class="bg-white rounded-lg shadow-card p-6 mb-6">
+  <h3 class="text-lg font-bold mb-4 flex items-center justify-between">
+    <span>Filters</span>
+    {% if selected_sources or selected_categories or date_filter %}
+    <a href="?q={{ q }}" class="text-sm text-juno-green hover:underline font-normal">Clear All</a>
+    {% endif %}
+  </h3>
+
+  <form method="get" action="/search/" id="filter-form">
+    <!-- Keep search query -->
+    <input type="hidden" name="q" value="{{ q }}">
+
+    <!-- Date Posted Filter -->
+    <div class="mb-6">
+      <h4 class="font-semibold text-gray-700 mb-3">Date Posted</h4>
+      <div class="space-y-2">
+        {% for range in aggregations.date_ranges.buckets %}
+        <label class="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded transition-colors">
+          <input
+            type="radio"
+            name="date"
+            value="{{ range.key }}"
+            {% if date_filter == range.key %}checked{% endif %}
+            onchange="this.form.submit()"
+            class="w-4 h-4 text-juno-green focus:ring-juno-green border-gray-300"
+          />
+          <span class="ml-2 text-sm">
+            {% if range.key == "24h" %}Last 24 hours{% endif %}
+            {% if range.key == "7d" %}Last 7 days{% endif %}
+            {% if range.key == "30d" %}Last 30 days{% endif %}
+            <span class="text-gray-500">({{ range.doc_count }})</span>
+          </span>
+        </label>
+        {% endfor %}
+        {% if date_filter %}
+        <label class="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded transition-colors">
+          <input
+            type="radio"
+            name="date"
+            value=""
+            onchange="this.form.submit()"
+            class="w-4 h-4 text-juno-green focus:ring-juno-green border-gray-300"
+          />
+          <span class="ml-2 text-sm">All time</span>
+        </label>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Source Filter -->
+    {% if aggregations.sources.buckets %}
+    <div class="mb-6">
+      <h4 class="font-semibold text-gray-700 mb-3">Source</h4>
+      <div class="space-y-2 max-h-64 overflow-y-auto">
+        {% for bucket in aggregations.sources.buckets %}
+        <label class="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded transition-colors">
+          <input
+            type="checkbox"
+            name="source"
+            value="{{ bucket.key }}"
+            {% if bucket.key in selected_sources %}checked{% endif %}
+            onchange="this.form.submit()"
+            class="w-4 h-4 text-juno-green focus:ring-juno-green border-gray-300 rounded"
+          />
+          <span class="ml-2 text-sm flex-1">
+            {{ bucket.key }}
+          </span>
+          <span class="text-xs text-gray-500">{{ bucket.doc_count }}</span>
+        </label>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Category Filter -->
+    {% if aggregations.categories.buckets %}
+    <div class="mb-6">
+      <h4 class="font-semibold text-gray-700 mb-3">Category</h4>
+      <div class="space-y-2">
+        {% for bucket in aggregations.categories.buckets %}
+        {% if bucket.key %}
+        <label class="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded transition-colors">
+          <input
+            type="checkbox"
+            name="category"
+            value="{{ bucket.key }}"
+            {% if bucket.key in selected_categories %}checked{% endif %}
+            onchange="this.form.submit()"
+            class="w-4 h-4 text-juno-green focus:ring-juno-green border-gray-300 rounded"
+          />
+          <span class="ml-2 text-sm flex-1">
+            {{ bucket.key }}
+          </span>
+          <span class="text-xs text-gray-500">{{ bucket.doc_count }}</span>
+        </label>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <noscript>
+      <button type="submit" class="btn-primary w-full">Apply Filters</button>
+    </noscript>
+  </form>
+</div>
+
+<style>
+  /* Custom scrollbar for filter lists */
+  .max-h-64::-webkit-scrollbar {
+    width: 6px;
+  }
+  .max-h-64::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+  .max-h-64::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
+  .max-h-64::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+</style>

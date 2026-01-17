@@ -1,47 +1,96 @@
 {% extends "rss/base.html" %}
 
-{% block title %}{{ q }} Job Search{% endblock %}
-{% block description %}{{ q }} Jobs Search{% endblock %}
+{% block title %}{% if q %}{{ q }} Job Search{% else %}Browse Jobs{% endif %}{% endblock %}
+{% block description %}{% if q %}{{ q }} Jobs Search{% else %}Browse all available job opportunities{% endif %}{% endblock %}
 
 {% block content %}
-    <main role="main" class="container">
+    <main role="main" class="container py-4">
+        <!-- Search Bar -->
         <div class="row py-4">
             <div class="col-12">
                 {% include "rss/search_bar.html" %}
             </div>
         </div>
-        <div class="row">
-            <div class="col-10">
-                <h3>
-                    Results for: {{ q }}
-                </h3>
+
+        <!-- Two Column Layout: Filters + Results -->
+        <div class="grid lg:grid-cols-4 gap-6">
+            <!-- Filter Sidebar (Left Column) -->
+            <div class="lg:col-span-1">
+                {% include "rss/components/filters.html" %}
             </div>
-            <div class="col-2" style="text-align: right;">
-                <h3>
-                    {% if page_num %}Page {{ page_num }}{% endif %}
-                </h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="list-group py-3">
+
+            <!-- Results Column (Right Column) -->
+            <div class="lg:col-span-3">
+                <!-- Results Header -->
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold">
+                            {% if q %}Results for "{{ q }}"{% else %}All Jobs{% endif %}
+                        </h2>
+                        <p class="text-gray-600 mt-1">
+                            {{ total_hits }} job{{ total_hits|pluralize }} found
+                            {% if selected_sources or selected_categories or date_filter %}
+                                <span class="text-juno-green">• Filtered</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                    {% if page_num %}
+                    <div class="text-gray-600">
+                        Page {{ page_num }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Job Results List -->
+                {% if hits %}
+                <div class="space-y-3">
                     {% for hit in hits %}
-                        <a href="/job/{{ hit.title|slugify }}/?id={{ hit.meta.id|urlencode }}&q={{ q }}"
-                           class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <span class="search-result mb-1">{{ hit.title }}</span>
-                                <small>
-                                    {{ hit.pubDate|date }}
-{#                                     ({{ hit.meta.score }}) #}
-                                </small>
-                            </div>
-                            <p class="mb-1"> {{ hit.body|truncatechars:400 }}</p>
-                            <small>{{ hit.link }}</small>
-                        </a>
+                    <a href="/job/{{ hit.title|slugify }}/?id={{ hit.meta.id|urlencode }}&q={{ q }}"
+                       class="job-card block hover:no-underline">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-semibold text-gray-900 hover:text-juno-green transition-colors flex-1">
+                                {{ hit.title }}
+                            </h3>
+                            <span class="text-sm text-gray-500 ml-4 whitespace-nowrap">
+                                {{ hit.pubDate|date:"M d, Y" }}
+                            </span>
+                        </div>
+                        <p class="text-gray-600 mb-3">
+                            {{ hit.body|truncatechars:300 }}
+                        </p>
+                        <div class="flex items-center gap-3 text-sm">
+                            {% if hit.source %}
+                            <span class="badge-green">
+                                {{ hit.source }}
+                            </span>
+                            {% endif %}
+                            {% if hit.category %}
+                            <span class="badge-amber">
+                                {{ hit.category }}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </a>
                     {% endfor %}
                 </div>
+                {% else %}
+                <div class="bg-gray-50 rounded-lg p-12 text-center">
+                    <div class="text-6xl mb-4">🔍</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">No jobs found</h3>
+                    <p class="text-gray-600 mb-4">
+                        Try adjusting your search or filters to find what you're looking for.
+                    </p>
+                    <a href="/search/" class="btn-primary inline-block">Clear All Filters</a>
+                </div>
+                {% endif %}
+
+                <!-- Pagination -->
+                {% if hits %}
+                <div class="mt-8">
+                    {% include "rss/pagination.html" %}
+                </div>
+                {% endif %}
             </div>
         </div>
-        {% include "rss/pagination.html" %}
     </main>
 {% endblock %}

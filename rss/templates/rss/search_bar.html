@@ -1,10 +1,21 @@
-<form action="/search/" method="get">
-    <div class="form-group">
-        <input  class="form-control search-bar"
-                onkeypress="noenter()" type="text" id="q" name="q"
-                placeholder="Search: Python AND (Bengaluru OR Remote)"
-                required="required"
-                {% if q %}value="{{ q }}"{% endif %}>
-        <small class="form-text text-muted mt-2">Try searching for skills, locations, or job titles</small>
+<form action="/search/" method="get" class="w-full">
+    <div class="relative">
+        <input
+            type="text"
+            id="q"
+            name="q"
+            class="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-full focus:outline-none focus:border-juno-green focus:ring-2 focus:ring-juno-green/20 transition-all duration-200 pr-16"
+            placeholder="Search: Python AND (Remote OR Bengaluru)"
+            {% if q %}value="{{ q }}"{% endif %}
+        />
+        <button
+            type="submit"
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-juno-green text-white px-6 py-2 rounded-full hover:bg-green-600 transition-all duration-200 font-semibold"
+        >
+            Search
+        </button>
     </div>
+    <p class="text-sm text-gray-400 mt-2 px-2">
+        💡 Try searching for skills, locations, or job titles. Use AND, OR, NOT for advanced searches.
+    </p>
 </form>

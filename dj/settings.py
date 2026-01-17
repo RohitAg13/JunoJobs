@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
     "crispy_forms",
     "tinymce",
     "rss",
@@ -150,3 +151,16 @@ POPULAR = [
     {"name": "Django", "search": "Django"},
     {"name": "Node.JS", "search": "NodeJS OR Node.js OR (Node AND JavaScript)"},
 ]
+
+# Feature flags for safe rollouts
+FEATURES = {
+    'FACETED_SEARCH': env.bool('FEATURE_FACETED_SEARCH', default=True),
+    'LANDING_PAGE': env.bool('FEATURE_LANDING_PAGE', default=True),
+    'SEO_ENHANCEMENTS': env.bool('FEATURE_SEO', default=True),
+}
+
+# Cache times (in seconds)
+CACHE_TIME_LANDING = 60 * 60  # 1 hour
+CACHE_TIME_JOBS = 60 * 15  # 15 minutes
+CACHE_TIME_SEARCH = 60 * 5  # 5 minutes
+CACHE_TIME_JOB_DETAIL = 60 * 60 * 24 * 7  # 1 week

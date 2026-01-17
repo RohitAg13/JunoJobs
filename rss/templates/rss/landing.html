@@ -1,0 +1,241 @@
+{% extends "rss/base.html" %}
+{% load static %}
+
+{% block title %}Find Your Next Opportunity{% endblock %}
+{% block description %}Discover job opportunities from top tech companies. Daily updates, smart search, and remote-first positions. Start your job search today.{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-gradient-to-br from-juno-navy via-blue-900 to-juno-navy text-white py-20">
+  <div class="container-custom">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 text-balance">
+          Find Your Next <span class="text-juno-amber">Opportunity</span>
+        </h1>
+        <p class="text-xl mb-8 text-gray-200">
+          Discover job opportunities from top tech companies. Daily updates, smart search, and remote-first positions all in one place.
+        </p>
+
+        <!-- Search Preview -->
+        <form action="/search/" method="get" class="mb-6">
+          <div class="flex gap-2">
+            <input
+              type="text"
+              name="q"
+              placeholder="Search for jobs..."
+              class="flex-1 px-6 py-4 rounded-full text-gray-900 border-2 border-transparent focus:border-juno-amber focus:outline-none transition-all"
+            />
+            <button type="submit" class="bg-juno-amber text-juno-navy px-8 py-4 rounded-full font-bold hover:bg-amber-300 transition-all shadow-lg hover:shadow-xl">
+              Search
+            </button>
+          </div>
+        </form>
+
+        <div class="flex gap-4 text-sm text-gray-300">
+          <span>💼 {{ count|default:"1000+" }} active jobs</span>
+          <span>🔄 Updated daily</span>
+          <span>🆓 100% Free</span>
+        </div>
+      </div>
+
+      <div class="hidden md:block">
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+          <div class="space-y-4">
+            <div class="bg-white/20 rounded-lg p-4 hover:bg-white/30 transition-all cursor-pointer">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-juno-amber rounded-lg flex items-center justify-center text-2xl">💻</div>
+                <div>
+                  <div class="font-semibold">Senior Software Engineer</div>
+                  <div class="text-sm text-gray-300">Remote • $150k-$200k</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white/20 rounded-lg p-4 hover:bg-white/30 transition-all cursor-pointer">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-green-400 rounded-lg flex items-center justify-center text-2xl">🎨</div>
+                <div>
+                  <div class="font-semibold">Product Designer</div>
+                  <div class="text-sm text-gray-300">Hybrid • $120k-$160k</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white/20 rounded-lg p-4 hover:bg-white/30 transition-all cursor-pointer">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-blue-400 rounded-lg flex items-center justify-center text-2xl">📊</div>
+                <div>
+                  <div class="font-semibold">Data Scientist</div>
+                  <div class="text-sm text-gray-300">Remote • $130k-$180k</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20 bg-gray-50">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="section-title">Why Choose Juno Jobs?</h2>
+      <p class="section-subtitle">Everything you need to find your perfect role</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="bg-white p-8 rounded-xl shadow-card hover:shadow-card-hover transition-all">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 text-3xl">
+          🔄
+        </div>
+        <h3 class="text-xl font-bold mb-3">Daily Updates</h3>
+        <p class="text-gray-600">
+          Fresh job postings aggregated daily from top job boards and company career pages.
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-xl shadow-card hover:shadow-card-hover transition-all">
+        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-3xl">
+          🔍
+        </div>
+        <h3 class="text-xl font-bold mb-3">Smart Search</h3>
+        <p class="text-gray-600">
+          Advanced filtering by location, date, source, and category to find exactly what you want.
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-xl shadow-card hover:shadow-card-hover transition-all">
+        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-3xl">
+          🏠
+        </div>
+        <h3 class="text-xl font-bold mb-3">Remote First</h3>
+        <p class="text-gray-600">
+          Focus on remote and flexible work opportunities from companies worldwide.
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-xl shadow-card hover:shadow-card-hover transition-all">
+        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-4 text-3xl">
+          🆓
+        </div>
+        <h3 class="text-xl font-bold mb-3">100% Free</h3>
+        <p class="text-gray-600">
+          No hidden fees, no premium plans. All features available to everyone, forever.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Popular Categories Section -->
+<section class="py-20">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="section-title">Popular Categories</h2>
+      <p class="section-subtitle">Browse jobs by category</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <a href="/search/?q=python" class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+        <div class="text-3xl mb-2">🐍</div>
+        <div class="font-bold text-lg">Python</div>
+        <div class="text-sm opacity-90">Backend & Data</div>
+      </a>
+
+      <a href="/search/?q=javascript OR react OR vue OR angular" class="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+        <div class="text-3xl mb-2">⚡</div>
+        <div class="font-bold text-lg">JavaScript</div>
+        <div class="text-sm opacity-90">Frontend & Full-stack</div>
+      </a>
+
+      <a href="/search/?q=remote" class="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+        <div class="text-3xl mb-2">🌍</div>
+        <div class="font-bold text-lg">Remote</div>
+        <div class="text-sm opacity-90">Work from anywhere</div>
+      </a>
+
+      <a href="/search/?q=senior" class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+        <div class="text-3xl mb-2">🎯</div>
+        <div class="font-bold text-lg">Senior Roles</div>
+        <div class="text-sm opacity-90">Leadership positions</div>
+      </a>
+
+      <a href="/search/?q=design" class="bg-gradient-to-br from-pink-500 to-pink-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+        <div class="text-3xl mb-2">🎨</div>
+        <div class="font-bold text-lg">Design</div>
+        <div class="text-sm opacity-90">UI/UX & Product</div>
+      </a>
+
+      <a href="/search/?q=data OR analytics" class="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+        <div class="text-3xl mb-2">📊</div>
+        <div class="font-bold text-lg">Data</div>
+        <div class="text-sm opacity-90">Analytics & Science</div>
+      </a>
+
+      <a href="/search/?q=devops OR kubernetes OR docker" class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+        <div class="text-3xl mb-2">🔧</div>
+        <div class="font-bold text-lg">DevOps</div>
+        <div class="text-sm opacity-90">Infrastructure & Cloud</div>
+      </a>
+
+      <a href="/search/?q=product manager" class="bg-gradient-to-br from-red-500 to-red-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
+        <div class="text-3xl mb-2">📱</div>
+        <div class="font-bold text-lg">Product</div>
+        <div class="text-sm opacity-90">Management & Strategy</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Trusted Sources Section -->
+<section class="py-20 bg-gray-50">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="section-title">Trusted Job Sources</h2>
+      <p class="section-subtitle">We aggregate from the best job boards and career sites</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+      <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center text-gray-600 font-semibold">
+        Indeed
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center text-gray-600 font-semibold">
+        LinkedIn
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center text-gray-600 font-semibold">
+        Glassdoor
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center text-gray-600 font-semibold">
+        AngelList
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center text-gray-600 font-semibold">
+        Remote.co
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center text-gray-600 font-semibold">
+        We Work Remotely
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-br from-juno-navy to-blue-900 text-white">
+  <div class="container-custom text-center">
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+      Start Your Job Search Today
+    </h2>
+    <p class="text-xl mb-8 text-gray-200 max-w-2xl mx-auto">
+      Join thousands of job seekers finding their dream roles. Browse all available positions or use our advanced search.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/jobs/" class="btn-primary inline-block text-lg">
+        Browse All Jobs
+      </a>
+      <a href="/search/" class="bg-white text-juno-navy px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all inline-block text-lg shadow-sm hover:shadow-md">
+        Advanced Search
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

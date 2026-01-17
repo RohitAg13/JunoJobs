@@ -19,8 +19,10 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("robots.txt", RedirectView.as_view(url="/static/robots.txt", permanent=True)),
     path("", include("rss.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

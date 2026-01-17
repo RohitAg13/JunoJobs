@@ -3,18 +3,15 @@
 {% block title %}{{ hit.title }}{% endblock %}
 {% block description %}{{ hit.body|truncatechars:200 }}{% endblock %}
 
+{% block og_title %}{{ hit.title }} - Juno Jobs{% endblock %}
+{% block og_description %}{{ hit.body|striptags|truncatechars:200 }}{% endblock %}
+{% block og_type %}article{% endblock %}
+
 {% block content %}
-    <main role="main" class="container">
-        <div class="row py-4">
-            <div class="col-10">
-                {% include "rss/search_bar.html" %}
-            </div>
-        </div>
-        <div class="row">
-            {% include "rss/body_html.html" %}
-{#            <div class="col-2">#}
-{#                {% include "rss/popular.html" %}#}
-{#            </div>#}
-        </div>
+    <!-- Job Posting Structured Data -->
+    {% include "rss/seo/job_posting_schema.html" %}
+
+    <main class="py-8">
+        {% include "rss/body_html.html" %}
     </main>
 {% endblock %}

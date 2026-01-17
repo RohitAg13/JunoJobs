@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans text-gray-900;
+  }
+}
+
+@layer components {
+  .search-bar-tailwind {
+    @apply w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-full
+           focus:outline-none focus:border-juno-green focus:ring-2 focus:ring-juno-green/20
+           transition-all duration-200;
+  }
+
+  .job-card {
+    @apply bg-white rounded-lg border-l-4 border-juno-green p-4 mb-3
+           shadow-card hover:shadow-card-hover transition-all duration-200
+           hover:-translate-y-0.5;
+  }
+
+  .btn-primary {
+    @apply bg-juno-green text-white px-6 py-3 rounded-full font-semibold
+           hover:bg-green-600 transition-all duration-200
+           shadow-sm hover:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply bg-juno-navy text-white px-6 py-3 rounded-full font-semibold
+           hover:bg-blue-900 transition-all duration-200
+           shadow-sm hover:shadow-md;
+  }
+
+  .badge {
+    @apply inline-block px-3 py-1 text-sm font-medium rounded-full;
+  }
+
+  .badge-green {
+    @apply badge bg-green-100 text-green-800;
+  }
+
+  .badge-amber {
+    @apply badge bg-amber-100 text-amber-800;
+  }
+
+  .badge-navy {
+    @apply badge bg-blue-100 text-blue-800;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-gray-900 mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-gray-600 mb-8;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

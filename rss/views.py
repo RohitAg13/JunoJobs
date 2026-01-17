@@ -30,12 +30,24 @@ def create_index_if_not_exists(index_name):
 
 import os
 
-es_host = os.getenv("ELASTICSEARCH_HOST", "elasticsearch")
+es_host = os.getenv("ELASTICSEARCH_HOST", "localhost")
 es_port = os.getenv("ELASTICSEARCH_PORT", "9200")
-connections.create_connection(hosts=[f"{es_host}:{es_port}"])
-create_index_if_not_exists("rss")
-ONE_WEEK = 7 * 24 * 60 * 60
-ONE_HOUR = 60 * 60
+
+# Create ES connection with error handling
+try:
+    connections.create_connection(hosts=[f"{es_host}:{es_port}"], timeout=5)
+    create_index_if_not_exists("rss")
+except Exception as e:
+    print(f"Warning: Could not connect to Elasticsearch at {es_host}:{es_port}")
+    print(f"Error: {e}")
+    print("Server will start but search functionality will be limited.")
+
+from django.conf import settings
+
+# Cache times from settings or defaults
+ONE_WEEK = getattr(settings, 'CACHE_TIME_JOB_DETAIL', 7 * 24 * 60 * 60)
+ONE_HOUR = getattr(settings, 'CACHE_TIME_JOBS', 60 * 60)
+FIVE_MINUTES = getattr(settings, 'CACHE_TIME_SEARCH', 5 * 60)
 
 
 def _fetch_latest_for_source(source):
@@ -51,17 +63,33 @@ def _fetch_latest_for_source(source):
 
 
 @cache_page(ONE_HOUR)
+def landing(request):
+    """Landing page view with job count."""
+    try:
+        total_jobs = Search(index="rss").count()
+    except:
+        total_jobs = "1000+"  # Fallback when ES is offline
+    context = {"count": total_jobs}
+    return render(request, "rss/landing.html", context)
+
+
+@cache_page(ONE_HOUR)
 def index(request):
     context = {"sources": [], "count": 0}
-    for source in sources:
-        if "show_in_homepage" not in source:
-            source["show_in_homepage"] = True
-        items = _fetch_latest_for_source(source["name"])
-        if items:
-            context["sources"].append({"desc": source, "items": items})
+    try:
+        for source in sources:
+            if "show_in_homepage" not in source:
+                source["show_in_homepage"] = True
+            items = _fetch_latest_for_source(source["name"])
+            if items:
+                context["sources"].append({"desc": source, "items": items})
 
-    total_jobs = Search(index="rss").count()
-    context["count"] = total_jobs
+        total_jobs = Search(index="rss").count()
+        context["count"] = total_jobs
+    except:
+        # Graceful degradation when ES is offline
+        context["count"] = "1000+"
+        context["es_offline"] = True
 
     return render(request, "rss/index.html", context)
 
@@ -72,22 +100,102 @@ def _convert_dates(hits):
             hit["pubDate"] = dateutil.parser.parse(hit["pubDate"])
 
 
-@cache_page(ONE_HOUR)
+@cache_page(FIVE_MINUTES)
 def search(request):
     SIZE = 40
     q = request.GET.get("q", "")
     _from = int(request.GET.get("from", 0))
+
+    # Get filter parameters
+    selected_sources = request.GET.getlist("source")
+    selected_categories = request.GET.getlist("category")
+    date_filter = request.GET.get("date", "")
+
+    # Build query
     query = Search(index="rss", doc_type="item")
+
+    # Base query with text search
+    if q:
+        base_query = {
+            "query_string": {
+                "fields": ["title^2", "body"],
+                "query": q,
+                "default_operator": "AND"
+            }
+        }
+    else:
+        base_query = {"match_all": {}}
+
+    # Build filters
+    filters = []
+
+    # Source filter
+    if selected_sources:
+        filters.append({"terms": {"source": selected_sources}})
+
+    # Category filter
+    if selected_categories:
+        filters.append({"terms": {"category": selected_categories}})
+
+    # Date filter
+    if date_filter:
+        date_ranges = {
+            "24h": "now-1d/d",
+            "7d": "now-7d/d",
+            "30d": "now-30d/d"
+        }
+        if date_filter in date_ranges:
+            filters.append({
+                "range": {
+                    "pubDate": {
+                        "gte": date_ranges[date_filter]
+                    }
+                }
+            })
+
+    # Combine query and filters
+    if filters:
+        final_query = {
+            "bool": {
+                "must": base_query,
+                "filter": filters
+            }
+        }
+    else:
+        final_query = base_query
+
+    # Build query body with aggregations
     query_body = {
         "size": SIZE,
         "from": _from,
-        "query": {
-            "query_string": {"fields": ["title", "body"], "query": q},
-            # "sort": [
-            #     {"pubDate": {"order": "desc"}},
-            # ]
-        },
+        "query": final_query,
+        "sort": [{"pubDate": {"order": "desc", "unmapped_type": "date"}}],
+        "aggs": {
+            "sources": {
+                "terms": {
+                    "field": "source",
+                    "size": 50
+                }
+            },
+            "categories": {
+                "terms": {
+                    "field": "category",
+                    "size": 20
+                }
+            },
+            "date_ranges": {
+                "date_range": {
+                    "field": "pubDate",
+                    "ranges": [
+                        {"key": "24h", "from": "now-1d/d"},
+                        {"key": "7d", "from": "now-7d/d"},
+                        {"key": "30d", "from": "now-30d/d"}
+                    ]
+                }
+            }
+        }
     }
+
     query.update_from_dict(query_body)
 
     try:
@@ -100,6 +208,10 @@ def search(request):
 
     _convert_dates(res.hits)
     total_hits = res["hits"]["total"]["value"]
+
+    # Process aggregations
+    aggs = res.aggregations if hasattr(res, 'aggregations') else {}
+
     context = {
         "q": q,
         "hits": res.hits,
@@ -109,6 +221,10 @@ def search(request):
         "prev": _from - SIZE,
         "next": _from + SIZE,
         "page_num": (math.floor(_from / SIZE) + 1),
+        "aggregations": aggs,
+        "selected_sources": selected_sources,
+        "selected_categories": selected_categories,
+        "date_filter": date_filter,
     }
     return render(request, "rss/search.html", context)
 

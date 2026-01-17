@@ -6,6 +6,9 @@
     <meta name="description" content="{% block description %}{% endblock %}" />
 
     {% include "rss/head.html" %}
+
+    <!-- Website Structured Data -->
+    {% include "rss/seo/website_schema.html" %}
   </head>
 
   <body>
@@ -25,30 +28,15 @@
       <div class="navbar back shadow-sm">
         <div class="container d-flex justify-content-between">
           <a href="/" class="navbar-brand d-flex align-items-center">
-            <div class="logo-text">
-              <span class="juno">Juno</span> <span class="jobs">Jobs</span>
-            </div>
+            <img src="/static/images/logo.png" alt="Juno Jobs" class="logo-img" />
             <style>
-              .logo-text {
-                font-family: "Inter", sans-serif;
-                background-color: #213d6b;
-                padding: 12px 15px;
-                border-radius: 8px;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+              .logo-img {
+                height: 48px;
                 transition: all 0.3s ease;
               }
-              .logo-text:hover {
+              .logo-img:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-              }
-              .juno {
-                color: #fbbf24;
-                font-weight: bold;
-                letter-spacing: 0.5px;
-              }
-              .jobs {
-                color: #f1f5f9;
-                letter-spacing: 0.5px;
+                filter: brightness(1.1);
               }
             </style>
           </a>

@@ -1,54 +1,93 @@
 {% extends "rss/base.html" %}
 
 {% block description %}Juno Jobs Search Engine. Find Fresh Jobs from all over the world, updated everyday.{% endblock %}
-{% block title %}Juno Jobs Search Engine.{% endblock %}
+{% block title %}Browse All Jobs{% endblock %}
 
 {% block content %}
+<main class="bg-gray-50 min-h-screen">
+  <!-- Hero Section -->
+  <div class="bg-gradient-to-br from-juno-navy to-blue-900 text-white py-12">
+    <div class="container-custom">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        Browse All Jobs
+      </h1>
+      <p class="text-xl text-gray-200 mb-8">
+        Free database of jobs from all over the world. Updated daily. <span class="text-juno-amber font-bold">{{ count }}+</span> active positions
+      </p>
 
-<main role="main">
-  <div class="album py-5">
-    <div class="container">
-      <div class="form-group">
-        <h3>
-          <a href="https://rohitagarwal.dev">Free</a> database of jobs from all
-          over the world. Updated everyday. <a href="">{{count}}+ </a>Jobs
-        </h3>
-
-        {% include "rss/search_bar.html" %}
-      </div>
+      {% include "rss/search_bar.html" %}
     </div>
   </div>
 
-  <div class="container clearfix">
-    {% for source in sources %} {% if source.desc.show_in_homepage %}
-    <div class="float-left news-box">
-      <div>
-        <span class="news-box-title">
-          <a href="/source?q={{source.desc.name}}">{{ source.desc.name }}</a>
-        </span>
+  <!-- Jobs by Source Grid -->
+  <div class="container-custom py-12">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for source in sources %}
+      {% if source.desc.show_in_homepage %}
+      <div class="bg-white rounded-lg shadow-card hover:shadow-card-hover transition-all overflow-hidden">
+        <!-- Source Header -->
+        <div class="p-6 border-b border-gray-100">
+          <div class="flex items-center justify-between mb-2">
+            <h2 class="text-xl font-bold text-gray-900">
+              <a href="/source?q={{ source.desc.name }}" class="hover:text-juno-green transition-colors">
+                {{ source.desc.name }}
+              </a>
+            </h2>
+            {% if source.desc.category == 'remote-jobs' %}
+            <span class="badge-green text-xs">
+              🌍 REMOTE
+            </span>
+            {% endif %}
+          </div>
+          <p class="text-sm text-gray-600">
+            {{ source.items|length }} recent posting{{ source.items|length|pluralize }}
+          </p>
+        </div>
 
-        {% if source.desc.category == 'remote-jobs' %}
-        <span class="badge badge-secondary">REMOTE</span>
-        {% endif %}
-      </div>
-      <ul class="job-list">
-        {% for item in source.items %}
-        <li class="{% if forloop.counter > 5 %}hidden-job{% endif %}">
-          <a
-            href="/job/{{ item.title|slugify }}/?id={{ item.meta.id|urlencode }}"
-            >{{ item.title }}</a
-          >
-        </li>
-        {% endfor %}
-      </ul>
-      {% if source.items and source.items|length > 5 %}
-      <div class="show-more-container">
-        <a href="/source?q={{source.desc.name}}" class="show-more-btn">Show More</a>
+        <!-- Job List -->
+        <div class="p-6">
+          <ul class="space-y-3">
+            {% for item in source.items %}
+            <li class="{% if forloop.counter > 5 %}hidden{% endif %}">
+              <a href="/job/{{ item.title|slugify }}/?id={{ item.meta.id|urlencode }}"
+                 class="text-gray-700 hover:text-juno-green transition-colors line-clamp-2 block text-sm">
+                <span class="inline-block w-1.5 h-1.5 bg-juno-green rounded-full mr-2"></span>
+                {{ item.title }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+
+          {% if source.items and source.items|length > 5 %}
+          <div class="mt-4 pt-4 border-t border-gray-100">
+            <a href="/source?q={{ source.desc.name }}"
+               class="block text-center text-sm font-medium text-juno-green hover:text-green-700 transition-colors">
+              Show All {{ source.items|length }} Jobs →
+            </a>
+          </div>
+          {% endif %}
+        </div>
       </div>
       {% endif %}
+      {% endfor %}
     </div>
-    {% endif %} {% endfor %}
+
+    <!-- View All CTA -->
+    <div class="mt-12 text-center">
+      <a href="/search/" class="btn-primary inline-block text-lg">
+        Search All Jobs
+      </a>
+    </div>
   </div>
 </main>
 
+<style>
+/* Line clamp utility for job titles */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+</style>
 {% endblock %}
