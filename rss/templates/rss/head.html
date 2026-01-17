@@ -15,9 +15,10 @@
 <!-- SEO Meta Tags -->
 {% include "rss/seo/og_tags.html" %}
 
-<link href="/static/css/tailwind.output.css" rel="stylesheet" />
-<link href="/static/css/bootstrap.min.css" rel="stylesheet" />
-<link href="/static/base.css" rel="stylesheet" />
+{% load static %}
+<link href="{% static 'css/tailwind.output.css' %}" rel="stylesheet" />
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+<link href="{% static 'base.css' %}" rel="stylesheet" />
 <style>
   /* Enhanced search bar */
   .search-bar {
