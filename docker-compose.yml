@@ -81,8 +81,6 @@ services:
     volumes:
       - kibana_data:/usr/share/kibana/data
     restart: unless-stopped
-    profiles:
-      - monitoring
 
   memcached:
     image: memcached:1.6-alpine
