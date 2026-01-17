@@ -3,21 +3,35 @@ version: '3.5'
 services:
   web:
     build: .
-    command: /bin/sh -c "python manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8000"
+    command: >
+      /bin/sh -c "
+      echo 'Starting Juno Jobs deployment...' &&
+      echo 'Running database migrations...' &&
+      python manage.py migrate --noinput &&
+      echo 'Collecting static files...' &&
+      python manage.py collectstatic --noinput &&
+      echo 'Starting Gunicorn server...' &&
+      gunicorn dj.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120 --access-logfile - --error-logfile -
+      "
     volumes:
       - .:/code
+      - static_volume:/code/staticfiles
     ports:
       - "8001:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=dj.settings
       - DJANGO_DEBUG=False
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1}
       - MEMCACHED_HOST=memcached
       - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
     depends_on:
       - elasticsearch
       - memcached
     networks:
       - elasticnet
+    restart: unless-stopped
 
   cron:
     image: alpine:latest
@@ -29,6 +43,7 @@ services:
       - elasticsearch
     networks:
       - elasticnet
+    restart: unless-stopped
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
@@ -38,12 +53,18 @@ services:
       cluster.name: elasticsearch
       ES_JAVA_OPTS: -Xmx512m -Xms512m
     ports:
-      - 9200:9200
+      - "9200:9200"
     networks:
       - elasticnet
     volumes:
       - es_data:/usr/share/elasticsearch/data
-  
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   kibana:
     image: docker.elastic.co/kibana/kibana:7.14.0
     environment:
@@ -51,14 +72,17 @@ services:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       ES_JAVA_OPTS: -Xmx512m -Xms512m
     ports:
-      - 9300:9300
-      - 5601:5601
+      - "9300:9300"
+      - "5601:5601"
     networks:
       - elasticnet
     depends_on:
       - elasticsearch
     volumes:
       - kibana_data:/usr/share/kibana/data
+    restart: unless-stopped
+    profiles:
+      - monitoring
 
   memcached:
     image: memcached:1.6-alpine
@@ -67,11 +91,15 @@ services:
     networks:
       - elasticnet
     command: memcached -m 64
+    restart: unless-stopped
 
 
 volumes:
   es_data:
+    driver: local
   kibana_data:
+    driver: local
+  static_volume:
     driver: local
 
 networks:
