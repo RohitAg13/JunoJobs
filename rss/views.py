@@ -56,7 +56,7 @@ def _fetch_latest_for_source(source):
         "sort": [{"pubDate": {"unmapped_type": "date", "order": "desc"}}],
         "query": {"match_phrase": {"source": source}},
     }
-    query = Search(index="rss", doc_type="item")
+    query = Search(index="rss")
     query.update_from_dict(query_body)
     res = query.execute()
     return res
@@ -112,7 +112,7 @@ def search(request):
     date_filter = request.GET.get("date", "")
 
     # Build query
-    query = Search(index="rss", doc_type="item")
+    query = Search(index="rss")
 
     # Base query with text search
     if q:
@@ -240,7 +240,7 @@ def job(request, title=None):
     if id is None:
         raise Http404("id param not provided.")
     q = request.GET.get("q", None)
-    query = Search(index="rss", doc_type="item").query("match", _id=id)
+    query = Search(index="rss").query("match", _id=id)
     res = query.execute()
     if len(res.hits) == 0:
         raise Http404("ID does not exists")
@@ -261,7 +261,7 @@ def source_specific(request):
     q = request.GET.get("q", "")
     SIZE = 50
     _from = int(request.GET.get("from", 0))
-    query = Search(index="rss", doc_type="item")
+    query = Search(index="rss")
     query_body = {
         "size": SIZE,
         "sort": [{"pubDate": {"unmapped_type": "date", "order": "desc"}}],

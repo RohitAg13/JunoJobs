@@ -14,7 +14,7 @@ class JobSitemap(Sitemap):
         """Return recent jobs from last 30 days."""
         thirty_days_ago = datetime.now() - timedelta(days=30)
 
-        query = Search(index="rss", doc_type="item")
+        query = Search(index="rss")
         query_body = {
             "size": self.limit,
             "sort": [{"pubDate": {"order": "desc", "unmapped_type": "date"}}],
