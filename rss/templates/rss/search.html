@@ -4,83 +4,123 @@
 {% block description %}{% if q %}{{ q }} Jobs Search{% else %}Browse all available job opportunities{% endif %}{% endblock %}
 
 {% block content %}
-    <main role="main" class="container py-4">
-        <!-- Search Bar -->
-        <div class="row py-4">
-            <div class="col-12">
+    <main role="main" class="bg-gray-50 min-h-screen">
+        <!-- Search Header -->
+        <div class="bg-gradient-to-br from-juno-navy to-blue-900 text-white py-8">
+            <div class="container-custom">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">
+                    {% if q %}Search: "{{ q }}"{% else %}Browse All Jobs{% endif %}
+                </h1>
                 {% include "rss/search_bar.html" %}
             </div>
         </div>
 
-        <!-- Two Column Layout: Filters + Results -->
-        <div class="grid lg:grid-cols-4 gap-6">
-            <!-- Filter Sidebar (Left Column) -->
-            <div class="lg:col-span-1">
-                {% include "rss/components/filters.html" %}
-            </div>
-
-            <!-- Results Column (Right Column) -->
-            <div class="lg:col-span-3">
-                <!-- Results Header -->
-                <div class="flex justify-between items-center mb-4">
-                    <div>
-                        <h2 class="text-2xl font-bold">
-                            {% if q %}Results for "{{ q }}"{% else %}All Jobs{% endif %}
-                        </h2>
-                        <p class="text-gray-600 mt-1">
-                            {{ total_hits }} job{{ total_hits|pluralize }} found
-                            {% if selected_sources or selected_categories or date_filter %}
-                                <span class="text-juno-green">• Filtered</span>
-                            {% endif %}
-                        </p>
-                    </div>
-                    {% if page_num %}
-                    <div class="text-gray-600">
-                        Page {{ page_num }}
-                    </div>
-                    {% endif %}
+        <!-- Main Content -->
+        <div class="container-custom py-8">
+            <!-- Two Column Layout: Filters + Results -->
+            <div class="grid lg:grid-cols-4 gap-6">
+                <!-- Filter Sidebar (Left Column) -->
+                <div class="lg:col-span-1">
+                    {% include "rss/components/filters.html" %}
                 </div>
+
+                <!-- Results Column (Right Column) -->
+                <div class="lg:col-span-3">
+                    <!-- Results Header -->
+                    <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-900">
+                                    {{ total_hits|default:"0" }} job{{ total_hits|pluralize }} found
+                                </h2>
+                                {% if selected_sources or selected_categories or date_filter %}
+                                <p class="text-sm text-gray-600 mt-1">
+                                    <span class="inline-flex items-center gap-1">
+                                        <svg class="w-4 h-4 text-juno-green" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Filters active
+                                    </span>
+                                </p>
+                                {% endif %}
+                            </div>
+                            {% if page_num %}
+                            <div class="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                                Page {{ page_num }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
 
                 <!-- Job Results List -->
                 {% if hits %}
-                <div class="space-y-3">
+                <div class="space-y-4">
                     {% for hit in hits %}
-                    <a href="/job/{{ hit.title|slugify }}/?id={{ hit.meta.id|urlencode }}&q={{ q }}"
-                       class="job-card block hover:no-underline">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-semibold text-gray-900 hover:text-juno-green transition-colors flex-1">
-                                {{ hit.title }}
-                            </h3>
-                            <span class="text-sm text-gray-500 ml-4 whitespace-nowrap">
-                                {{ hit.pubDate|date:"M d, Y" }}
-                            </span>
-                        </div>
-                        <p class="text-gray-600 mb-3">
-                            {{ hit.body|truncatechars:300 }}
-                        </p>
-                        <div class="flex items-center gap-3 text-sm">
-                            {% if hit.source %}
-                            <span class="badge-green">
-                                {{ hit.source }}
-                            </span>
-                            {% endif %}
-                            {% if hit.category %}
-                            <span class="badge-amber">
-                                {{ hit.category }}
-                            </span>
-                            {% endif %}
-                        </div>
-                    </a>
+                    <div class="bg-white rounded-lg border-l-4 border-juno-green p-6 hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+                        <a href="/job/{{ hit.title|slugify }}/?id={{ hit.meta.id|urlencode }}&q={{ q }}"
+                           class="block hover:no-underline">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-bold text-gray-900 hover:text-juno-green transition-colors flex-1 pr-4">
+                                    {{ hit.title }}
+                                </h3>
+                                <div class="flex flex-col items-end gap-1">
+                                    <span class="text-sm text-gray-500 whitespace-nowrap">
+                                        {{ hit.pubDate|date:"M d, Y" }}
+                                    </span>
+                                    {% if hit.pubDate|timesince < "1 day" %}
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-semibold">
+                                        NEW
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <p class="text-gray-700 mb-4 line-clamp-3">
+                                {{ hit.body|striptags|truncatechars:250 }}
+                            </p>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                {% if hit.source %}
+                                <span class="inline-flex items-center gap-1 px-3 py-1 bg-juno-green/10 text-juno-green rounded-full text-sm font-medium">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                    {{ hit.source }}
+                                </span>
+                                {% endif %}
+                                {% if hit.category %}
+                                <span class="inline-flex items-center gap-1 px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm font-medium">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                                    </svg>
+                                    {{ hit.category }}
+                                </span>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </div>
                     {% endfor %}
                 </div>
                 {% else %}
-                <div class="bg-gray-50 rounded-lg p-12 text-center">
+                <div class="bg-white rounded-lg p-12 text-center shadow-sm">
                     <div class="text-6xl mb-4">🔍</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">No jobs found</h3>
-                    <p class="text-gray-600 mb-4">
-                        Try adjusting your search or filters to find what you're looking for.
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">No jobs found</h3>
+                    <p class="text-gray-600 mb-6 max-w-md mx-auto">
+                        {% if q %}
+                        We couldn't find any jobs matching "{{ q }}". Try adjusting your search or filters to find what you're looking for.
+                        {% else %}
+                        Try searching for specific skills, locations, or job titles.
+                        {% endif %}
                     </p>
-                    <a href="/search/" class="btn-primary inline-block">Clear All Filters</a>
+                    <div class="flex gap-3 justify-center">
+                        <a href="/search/" class="inline-flex items-center gap-2 px-6 py-3 bg-juno-green text-white rounded-full font-semibold hover:bg-green-600 transition-all shadow-sm hover:shadow-md">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                            </svg>
+                            Clear Filters
+                        </a>
+                        <a href="/jobs/" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-700 border-2 border-gray-200 rounded-full font-semibold hover:border-juno-green hover:text-juno-green transition-all">
+                            Browse All Jobs
+                        </a>
+                    </div>
                 </div>
                 {% endif %}
 
@@ -92,5 +132,6 @@
                 {% endif %}
             </div>
         </div>
+    </div>
     </main>
 {% endblock %}
