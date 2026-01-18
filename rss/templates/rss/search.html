@@ -17,15 +17,10 @@
 
         <!-- Main Content -->
         <div class="container-custom py-8">
-            <!-- Two Column Layout: Filters + Results -->
-            <div class="grid lg:grid-cols-4 gap-6">
-                <!-- Filter Sidebar (Left Column) -->
-                <div class="lg:col-span-1">
-                    {% include "rss/components/filters.html" %}
-                </div>
-
-                <!-- Results Column (Right Column) -->
-                <div class="lg:col-span-3">
+            <!-- Single Column Layout (Filters temporarily disabled) -->
+            <div>
+                <!-- Results Column -->
+                <div>
                     <!-- Results Header -->
                     <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
                         <div class="flex justify-between items-center">
@@ -33,16 +28,9 @@
                                 <h2 class="text-xl font-bold text-gray-900">
                                     {{ total_hits|default:"0" }} job{{ total_hits|pluralize }} found
                                 </h2>
-                                {% if selected_sources or selected_categories or date_filter %}
                                 <p class="text-sm text-gray-600 mt-1">
-                                    <span class="inline-flex items-center gap-1">
-                                        <svg class="w-4 h-4 text-juno-green" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd"/>
-                                        </svg>
-                                        Filters active
-                                    </span>
+                                    {% if q %}Search results for "{{ q }}"{% else %}Browse all jobs{% endif %}
                                 </p>
-                                {% endif %}
                             </div>
                             {% if page_num %}
                             <div class="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">

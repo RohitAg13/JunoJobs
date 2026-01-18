@@ -164,36 +164,12 @@ def search(request):
     else:
         final_query = base_query
 
-    # Build query body with aggregations
+    # Build query body without aggregations (they cause issues with field mappings)
     query_body = {
         "size": SIZE,
         "from": _from,
         "query": final_query,
         "sort": [{"pubDate": {"order": "desc", "unmapped_type": "date"}}],
-        "aggs": {
-            "sources": {
-                "terms": {
-                    "field": "source",
-                    "size": 50
-                }
-            },
-            "categories": {
-                "terms": {
-                    "field": "category",
-                    "size": 20
-                }
-            },
-            "date_ranges": {
-                "date_range": {
-                    "field": "pubDate",
-                    "ranges": [
-                        {"key": "24h", "from": "now-1d/d"},
-                        {"key": "7d", "from": "now-7d/d"},
-                        {"key": "30d", "from": "now-30d/d"}
-                    ]
-                }
-            }
-        }
     }
 
     query.update_from_dict(query_body)
@@ -201,16 +177,27 @@ def search(request):
     try:
         res = query.execute()
     except elasticsearch.RequestError as err:
+        # Log the actual error for debugging
+        import traceback
+        print(f"Elasticsearch error for query: {q}")
+        print(f"Error details: {err.info}")
+        print(traceback.format_exc())
+
         json_error = json.dumps(err.info["error"]["root_cause"], indent=4)
         return render(
             request, "rss/search_error.html", {"json_error": json_error, "q": q}
         )
+    except Exception as e:
+        # Catch any other errors
+        import traceback
+        print(f"Unexpected error during search: {str(e)}")
+        print(traceback.format_exc())
+        return render(
+            request, "rss/search_error.html", {"json_error": str(e), "q": q}
+        )
 
     _convert_dates(res.hits)
     total_hits = res["hits"]["total"]["value"]
-
-    # Process aggregations
-    aggs = res.aggregations if hasattr(res, 'aggregations') else {}
 
     context = {
         "q": q,
@@ -221,7 +208,6 @@ def search(request):
         "prev": _from - SIZE,
         "next": _from + SIZE,
         "page_num": (math.floor(_from / SIZE) + 1),
-        "aggregations": aggs,
         "selected_sources": selected_sources,
         "selected_categories": selected_categories,
         "date_filter": date_filter,
