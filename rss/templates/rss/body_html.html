@@ -62,7 +62,13 @@
         <!-- Job Description -->
         <div class="bg-white rounded-lg shadow-card p-6 md:p-8">
             <div class="prose prose-lg max-w-none">
-                {{ hit.body_html|safe }}
+                {% if hit.body_html %}
+                    {{ hit.body_html|safe }}
+                {% elif hit.body %}
+                    {{ hit.body|linebreaks }}
+                {% else %}
+                    <p class="text-gray-600">No job description available.</p>
+                {% endif %}
             </div>
         </div>
 
