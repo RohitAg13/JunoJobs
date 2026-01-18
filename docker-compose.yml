@@ -52,8 +52,7 @@ services:
       node.name: es01
       cluster.name: elasticsearch
       ES_JAVA_OPTS: -Xmx512m -Xms512m
-    ports:
-      - "9200:9200"
+    # Port not exposed externally for security - only accessible within Docker network
     networks:
       - elasticnet
     volumes:
@@ -71,8 +70,8 @@ services:
       SERVERNAME: kibana
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       ES_JAVA_OPTS: -Xmx512m -Xms512m
+    # Ports only exposed when using monitoring profile
     ports:
-      - "9300:9300"
       - "5601:5601"
     networks:
       - elasticnet
@@ -84,8 +83,7 @@ services:
 
   memcached:
     image: memcached:1.6-alpine
-    ports:
-      - "11211:11211"
+    # Port not exposed externally for security - only accessible within Docker network
     networks:
       - elasticnet
     command: memcached -m 64
