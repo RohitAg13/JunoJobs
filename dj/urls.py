@@ -24,5 +24,6 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("robots.txt", RedirectView.as_view(url="/static/robots.txt", permanent=True)),
+    path("google6c16eb9f8ab0d689.html", RedirectView.as_view(url="/static/google6c16eb9f8ab0d689.html", permanent=True)),
     path("", include("rss.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
