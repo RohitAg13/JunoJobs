@@ -1,3 +1,5 @@
+/* Juno Jobs Base Styles - Tailwind Compatible */
+
 /* Accessibility: Screen reader only class */
 .sr-only {
     position: absolute;
@@ -22,172 +24,18 @@
     white-space: normal;
 }
 
-html {
-}
-
+/* Minimal body and main layout */
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    line-height: 1.7;
-}
-
-a {
-    color: #1E293B;
-}
-
-.back {
-    /*background: linear-gradient(45deg, #29bae4 0%, #ee76ad 100%);*/
-    /*background: linear-gradient(45deg, #29bae4 0%, #ee6ab9 100%);*/
-    /*background-color: #303030;*/
-}
-
-.logo{
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    color: inherit;
-    fill: currentColor;
-    display: inline-block;
-    flex: none;
-    width: 200px;
-    height: 40px;
-    top: 4px;
-    position: relative;
-    color: #00AA48;
 }
 
 main {
     flex: 1;
 }
 
-nav {
-    font-family: "Avenir Next LT Pro Bold", helvetica, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    font-weight: bold;
-    font-size: 1rem;
-}
-
-@media only screen and (max-width: 600px) {
-    nav {
-        font-size: 14px;
-    }
-}
-
-nav a {
-    color: #4e555b;
-}
-
-nav a:hover {
-    color: #00AA48;
-    text-decoration: none;
-}
-
-h1 {
-    font-family: "Avenir Next LT Pro Bold", helvetica, sans-serif;
-    font-size: 50px;
-    font-weight: bold;
-}
-
-h3 {
-    font-family: "Avenir Next LT Pro Bold", helvetica, sans-serif;
-    font-size: 25px;
-    font-weight: bold;
-    color: #3f3f3f;
-}
-
-h4 {
-    /*font-family: "PT Mono";*/
-    /*font-family: Montserrat;*/
-    font-size: 24px;
-    font-weight: bold;
-    font-variant: all-small-caps;
-}
-
-h5 {
-    font-family: "Avenir Next LT Pro Bold", helvetica, sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    color: #3f3f3f;
-}
-
-.blink {
-    animation: blinker 1s linear 6;
-}
-
-@keyframes blinker {
-    50% {
-        opacity: 0;
-    }
-}
-
-.news-box {
-    width: 350px;
-    height: 520px;
-    overflow-y: hidden;
-    margin: 0 20px 30px 0;
-    position: relative;
-}
-
-.news-box > ul {
-    padding-inline-start: 0;
-}
-
-.news-box > ul > li {
-    border-bottom: 1px solid #c7c7c7;
-    list-style: none;
-    list-style-position: inside;
-    margin: 0;
-}
-
-.news-box > ul > li:hover {
-    background-color: #f3f3f3;
-}
-
-.news-box > ul > li > a {
-    color: #505050;
-    text-decoration: none;
-}
-
-.news-box:after {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    background-image: linear-gradient(to bottom,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 1) 90%);
-    width: 100%;
-    height: 4em;
-}
-
-.news-box-title {
-    font-family: "Avenir Next LT Pro Bold", helvetica, sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    color: #00AA48;
-    text-transform: uppercase;
-}
-
-.news-box > div > .badge {
-    vertical-align: middle;
-    margin-top: -0.5em;
-}
-
-.search-result {
-    font-family: "Avenir Next LT Pro Bold", helvetica, sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    color: #00AA48;
-}
-
+/* Legacy support for body_html content (from external sources) */
 .body_html {
 }
 
@@ -207,6 +55,7 @@ h5 {
     font-size: initial;
 }
 
+/* Pre-formatted text support */
 pre {
     white-space: -moz-pre-wrap; /* Mozilla, supported since 1999 */
     white-space: pre-wrap;
@@ -216,14 +65,7 @@ code {
     color: #3f3f3f;
 }
 
-.search-bar {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
-
-footer a {
-    color: #00AA48;
-}
-
+/* Avenir Next LT Pro Bold font face */
 @font-face {
     font-family: 'Avenir Next LT Pro Bold';
     font-style: normal;
