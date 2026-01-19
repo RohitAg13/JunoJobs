@@ -5,67 +5,139 @@
 {% block description %}Discover job opportunities from top tech companies. Daily updates, smart search, and remote-first positions. Start your job search today.{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="bg-gradient-to-br from-juno-navy via-blue-900 to-juno-navy text-white py-20">
-  <div class="container-custom">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <h1 class="text-4xl md:text-6xl font-bold mb-6 text-balance">
-          Find Your Next <span class="text-juno-amber">Opportunity</span>
+<!-- Hero Section with Modern Design -->
+<section class="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50">
+  <!-- Animated Background Elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-juno-green/10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-juno-amber/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-juno-navy/5 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- Grid Pattern Overlay -->
+  <div class="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_60%,transparent_100%)] opacity-40"></div>
+
+  <div class="container-custom relative z-10 py-20">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left Content -->
+      <div class="space-y-8 animate-fade-in">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-juno-green/10 to-juno-amber/10 border border-juno-green/20">
+          <span class="flex h-2 w-2 rounded-full bg-juno-green animate-pulse"></span>
+          <span class="text-sm font-semibold text-gray-700">{{ count|default:"1000+" }} Active Opportunities</span>
+        </div>
+
+        <!-- Heading -->
+        <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+          <span class="bg-gradient-to-r from-gray-900 via-juno-navy to-gray-900 bg-clip-text text-transparent">
+            Find Your Next
+          </span>
+          <br/>
+          <span class="bg-gradient-to-r from-juno-green via-green-500 to-juno-amber bg-clip-text text-transparent">
+            Dream Job
+          </span>
         </h1>
-        <p class="text-xl mb-8 text-gray-200">
-          Discover job opportunities from top tech companies. Daily updates, smart search, and remote-first positions all in one place.
+
+        <!-- Subtitle -->
+        <p class="text-xl text-gray-600 max-w-xl leading-relaxed">
+          Discover opportunities from top tech companies worldwide. Daily updates, smart search, and remote-first positions—all in one place.
         </p>
 
-        <!-- Search Preview -->
-        <form action="/search/" method="get" class="mb-6">
-          <div class="flex gap-2">
-            <input
-              type="text"
-              name="q"
-              placeholder="Search for jobs..."
-              class="flex-1 px-6 py-4 rounded-full text-gray-900 border-2 border-transparent focus:border-juno-amber focus:outline-none transition-all"
-            />
-            <button type="submit" class="bg-juno-amber text-juno-navy px-8 py-4 rounded-full font-bold hover:bg-amber-300 transition-all shadow-lg hover:shadow-xl">
-              Search
+        <!-- Enhanced Search Box -->
+        <form action="/search/" method="get" class="relative group">
+          <div class="relative flex items-center gap-2 p-2 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-transparent group-hover:border-juno-green/20">
+            <div class="flex-1 relative">
+              <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input
+                type="text"
+                name="q"
+                placeholder="Job title, keywords, or company..."
+                class="w-full px-12 py-4 text-gray-900 placeholder-gray-400 bg-transparent focus:outline-none text-lg"
+              />
+            </div>
+            <button type="submit" class="px-8 py-4 bg-gradient-to-r from-juno-green to-green-600 text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300 whitespace-nowrap">
+              Search Jobs
+              <svg class="inline-block ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </button>
           </div>
         </form>
 
-        <div class="flex gap-4 text-sm text-gray-300">
-          <span>💼 {{ count|default:"1000+" }} active jobs</span>
-          <span>🔄 Updated daily</span>
-          <span>🆓 100% Free</span>
+        <!-- Stats -->
+        <div class="flex flex-wrap gap-6 text-sm">
+          <div class="flex items-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-juno-green/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-juno-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <span class="font-semibold text-gray-700">Daily Updates</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-juno-amber/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-juno-amber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <span class="font-semibold text-gray-700">Remote First</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <span class="font-semibold text-gray-700">100% Free</span>
+          </div>
         </div>
       </div>
 
-      <div class="hidden md:block">
-        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-          <div class="space-y-4">
-            <div class="bg-white/20 rounded-lg p-4 hover:bg-white/30 transition-all cursor-pointer">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-juno-amber rounded-lg flex items-center justify-center text-2xl">💻</div>
-                <div>
-                  <div class="font-semibold">Senior Software Engineer</div>
-                  <div class="text-sm text-gray-300">Remote • $150k-$200k</div>
+      <!-- Right Content - Floating Job Cards -->
+      <div class="hidden lg:block relative">
+        <div class="relative">
+          <!-- Floating Cards with Animation -->
+          <div class="space-y-4" id="floating-cards">
+            <div class="floating-card bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-juno-green/30 cursor-pointer transform hover:-translate-y-2" style="animation-delay: 0s;">
+              <div class="flex items-start gap-4">
+                <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-2xl shrink-0">💻</div>
+                <div class="flex-1">
+                  <h3 class="font-bold text-lg text-gray-900 mb-1">Senior Software Engineer</h3>
+                  <p class="text-gray-600 text-sm mb-3">Remote • $150k-$200k/year</p>
+                  <div class="flex gap-2">
+                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">Full-time</span>
+                    <span class="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium">Remote</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="bg-white/20 rounded-lg p-4 hover:bg-white/30 transition-all cursor-pointer">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-green-400 rounded-lg flex items-center justify-center text-2xl">🎨</div>
-                <div>
-                  <div class="font-semibold">Product Designer</div>
-                  <div class="text-sm text-gray-300">Hybrid • $120k-$160k</div>
+
+            <div class="floating-card bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-juno-green/30 cursor-pointer transform hover:-translate-y-2" style="animation-delay: 0.5s;">
+              <div class="flex items-start gap-4">
+                <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center text-2xl shrink-0">🎨</div>
+                <div class="flex-1">
+                  <h3 class="font-bold text-lg text-gray-900 mb-1">Product Designer</h3>
+                  <p class="text-gray-600 text-sm mb-3">Hybrid • $120k-$160k/year</p>
+                  <div class="flex gap-2">
+                    <span class="px-3 py-1 bg-pink-50 text-pink-700 rounded-full text-xs font-medium">Full-time</span>
+                    <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-medium">Hybrid</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="bg-white/20 rounded-lg p-4 hover:bg-white/30 transition-all cursor-pointer">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-blue-400 rounded-lg flex items-center justify-center text-2xl">📊</div>
-                <div>
-                  <div class="font-semibold">Data Scientist</div>
-                  <div class="text-sm text-gray-300">Remote • $130k-$180k</div>
+
+            <div class="floating-card bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-juno-green/30 cursor-pointer transform hover:-translate-y-2" style="animation-delay: 1s;">
+              <div class="flex items-start gap-4">
+                <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-2xl shrink-0">📊</div>
+                <div class="flex-1">
+                  <h3 class="font-bold text-lg text-gray-900 mb-1">Data Scientist</h3>
+                  <p class="text-gray-600 text-sm mb-3">Remote • $130k-$180k/year</p>
+                  <div class="flex gap-2">
+                    <span class="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium">Full-time</span>
+                    <span class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-medium">Remote</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -74,115 +146,204 @@
       </div>
     </div>
   </div>
+
+  <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    .floating-card {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .floating-card:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+
+    .floating-card:nth-child(3) {
+      animation-delay: 1s;
+    }
+  </style>
 </section>
 
-<!-- Features Section -->
-<section class="py-20 bg-gray-50">
-  <div class="container-custom">
-    <div class="text-center mb-16">
-      <h2 class="section-title">Why Choose Juno Jobs?</h2>
-      <p class="section-subtitle">Everything you need to find your perfect role</p>
+<!-- Features Section with Modern Cards -->
+<section class="py-24 bg-white relative overflow-hidden">
+  <!-- Background Decoration -->
+  <div class="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-transparent"></div>
+
+  <div class="container-custom relative z-10">
+    <div class="text-center mb-16 space-y-4">
+      <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+        Why Choose Juno Jobs?
+      </h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Everything you need to find your perfect role, all in one place
+      </p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="bg-white p-8 rounded-xl shadow-card hover:shadow-card-hover transition-all">
-        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 text-3xl">
-          🔄
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Feature Card 1 -->
+      <div class="group relative bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-juno-green/30 hover:-translate-y-2">
+        <div class="absolute inset-0 bg-gradient-to-br from-juno-green/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative z-10">
+          <div class="w-16 h-16 bg-gradient-to-br from-juno-green to-green-600 rounded-2xl flex items-center justify-center mb-6 text-3xl shadow-lg group-hover:scale-110 transition-transform duration-500">
+            🔄
+          </div>
+          <h3 class="text-xl font-bold mb-3 text-gray-900">Daily Updates</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Fresh job postings aggregated daily from top job boards and company career pages.
+          </p>
         </div>
-        <h3 class="text-xl font-bold mb-3">Daily Updates</h3>
-        <p class="text-gray-600">
-          Fresh job postings aggregated daily from top job boards and company career pages.
-        </p>
       </div>
 
-      <div class="bg-white p-8 rounded-xl shadow-card hover:shadow-card-hover transition-all">
-        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-3xl">
-          🔍
+      <!-- Feature Card 2 -->
+      <div class="group relative bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-blue-500/30 hover:-translate-y-2">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative z-10">
+          <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 text-3xl shadow-lg group-hover:scale-110 transition-transform duration-500">
+            🔍
+          </div>
+          <h3 class="text-xl font-bold mb-3 text-gray-900">Smart Search</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Advanced filtering by location, date, source, and category to find exactly what you want.
+          </p>
         </div>
-        <h3 class="text-xl font-bold mb-3">Smart Search</h3>
-        <p class="text-gray-600">
-          Advanced filtering by location, date, source, and category to find exactly what you want.
-        </p>
       </div>
 
-      <div class="bg-white p-8 rounded-xl shadow-card hover:shadow-card-hover transition-all">
-        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-3xl">
-          🏠
+      <!-- Feature Card 3 -->
+      <div class="group relative bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-purple-500/30 hover:-translate-y-2">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative z-10">
+          <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 text-3xl shadow-lg group-hover:scale-110 transition-transform duration-500">
+            🏠
+          </div>
+          <h3 class="text-xl font-bold mb-3 text-gray-900">Remote First</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Focus on remote and flexible work opportunities from companies worldwide.
+          </p>
         </div>
-        <h3 class="text-xl font-bold mb-3">Remote First</h3>
-        <p class="text-gray-600">
-          Focus on remote and flexible work opportunities from companies worldwide.
-        </p>
       </div>
 
-      <div class="bg-white p-8 rounded-xl shadow-card hover:shadow-card-hover transition-all">
-        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-4 text-3xl">
-          🆓
+      <!-- Feature Card 4 -->
+      <div class="group relative bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-juno-amber/30 hover:-translate-y-2">
+        <div class="absolute inset-0 bg-gradient-to-br from-juno-amber/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative z-10">
+          <div class="w-16 h-16 bg-gradient-to-br from-juno-amber to-amber-600 rounded-2xl flex items-center justify-center mb-6 text-3xl shadow-lg group-hover:scale-110 transition-transform duration-500">
+            🆓
+          </div>
+          <h3 class="text-xl font-bold mb-3 text-gray-900">100% Free</h3>
+          <p class="text-gray-600 leading-relaxed">
+            No hidden fees, no premium plans. All features available to everyone, forever.
+          </p>
         </div>
-        <h3 class="text-xl font-bold mb-3">100% Free</h3>
-        <p class="text-gray-600">
-          No hidden fees, no premium plans. All features available to everyone, forever.
-        </p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Popular Categories Section -->
-<section class="py-20">
+<section class="py-24 bg-gray-50">
   <div class="container-custom">
-    <div class="text-center mb-16">
-      <h2 class="section-title">Popular Categories</h2>
-      <p class="section-subtitle">Browse jobs by category</p>
+    <div class="text-center mb-16 space-y-4">
+      <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+        Popular Categories
+      </h2>
+      <p class="text-xl text-gray-600">
+        Explore opportunities in your field
+      </p>
     </div>
 
-    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <a href="/search/?q=python" class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
-        <div class="text-3xl mb-2">🐍</div>
-        <div class="font-bold text-lg">Python</div>
-        <div class="text-sm opacity-90">Backend & Data</div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <a href="/search/?q=python" class="group relative overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+        <div class="relative z-10 space-y-2">
+          <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-500">🐍</div>
+          <div class="font-bold text-xl">Python</div>
+          <div class="text-sm opacity-90">Backend & Data</div>
+        </div>
       </a>
 
-      <a href="/search/?q=javascript OR react OR vue OR angular" class="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
-        <div class="text-3xl mb-2">⚡</div>
-        <div class="font-bold text-lg">JavaScript</div>
-        <div class="text-sm opacity-90">Frontend & Full-stack</div>
+      <a href="/search/?q=javascript OR react OR vue OR angular" class="group relative overflow-hidden bg-gradient-to-br from-yellow-500 to-yellow-600 text-white p-6 rounded-2xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+        <div class="relative z-10 space-y-2">
+          <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-500">⚡</div>
+          <div class="font-bold text-xl">JavaScript</div>
+          <div class="text-sm opacity-90">Frontend & Full-stack</div>
+        </div>
       </a>
 
-      <a href="/search/?q=remote" class="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
-        <div class="text-3xl mb-2">🌍</div>
-        <div class="font-bold text-lg">Remote</div>
-        <div class="text-sm opacity-90">Work from anywhere</div>
+      <a href="/search/?q=remote" class="group relative overflow-hidden bg-gradient-to-br from-juno-green to-green-600 text-white p-6 rounded-2xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+        <div class="relative z-10 space-y-2">
+          <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-500">🌍</div>
+          <div class="font-bold text-xl">Remote</div>
+          <div class="text-sm opacity-90">Work from anywhere</div>
+        </div>
       </a>
 
-      <a href="/search/?q=senior" class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
-        <div class="text-3xl mb-2">🎯</div>
-        <div class="font-bold text-lg">Senior Roles</div>
-        <div class="text-sm opacity-90">Leadership positions</div>
+      <a href="/search/?q=senior" class="group relative overflow-hidden bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-2xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+        <div class="relative z-10 space-y-2">
+          <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-500">🎯</div>
+          <div class="font-bold text-xl">Senior Roles</div>
+          <div class="text-sm opacity-90">Leadership positions</div>
+        </div>
       </a>
 
-      <a href="/search/?q=design" class="bg-gradient-to-br from-pink-500 to-pink-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
-        <div class="text-3xl mb-2">🎨</div>
-        <div class="font-bold text-lg">Design</div>
-        <div class="text-sm opacity-90">UI/UX & Product</div>
+      <a href="/search/?q=design" class="group relative overflow-hidden bg-gradient-to-br from-pink-500 to-pink-600 text-white p-6 rounded-2xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+        <div class="relative z-10 space-y-2">
+          <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-500">🎨</div>
+          <div class="font-bold text-xl">Design</div>
+          <div class="text-sm opacity-90">UI/UX & Product</div>
+        </div>
       </a>
 
-      <a href="/search/?q=data OR analytics" class="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
-        <div class="text-3xl mb-2">📊</div>
-        <div class="font-bold text-lg">Data</div>
-        <div class="text-sm opacity-90">Analytics & Science</div>
+      <a href="/search/?q=data OR analytics" class="group relative overflow-hidden bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-6 rounded-2xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+        <div class="relative z-10 space-y-2">
+          <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-500">📊</div>
+          <div class="font-bold text-xl">Data</div>
+          <div class="text-sm opacity-90">Analytics & Science</div>
+        </div>
       </a>
 
-      <a href="/search/?q=devops OR kubernetes OR docker" class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
-        <div class="text-3xl mb-2">🔧</div>
-        <div class="font-bold text-lg">DevOps</div>
-        <div class="text-sm opacity-90">Infrastructure & Cloud</div>
+      <a href="/search/?q=devops OR kubernetes OR docker" class="group relative overflow-hidden bg-gradient-to-br from-orange-500 to-orange-600 text-white p-6 rounded-2xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+        <div class="relative z-10 space-y-2">
+          <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-500">🔧</div>
+          <div class="font-bold text-xl">DevOps</div>
+          <div class="text-sm opacity-90">Infrastructure & Cloud</div>
+        </div>
       </a>
 
-      <a href="/search/?q=product manager" class="bg-gradient-to-br from-red-500 to-red-600 text-white p-6 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1">
-        <div class="text-3xl mb-2">📱</div>
-        <div class="font-bold text-lg">Product</div>
-        <div class="text-sm opacity-90">Management & Strategy</div>
+      <a href="/search/?q=product manager" class="group relative overflow-hidden bg-gradient-to-br from-red-500 to-red-600 text-white p-6 rounded-2xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+        <div class="relative z-10 space-y-2">
+          <div class="text-4xl mb-3 group-hover:scale-110 transition-transform duration-500">📱</div>
+          <div class="font-bold text-xl">Product</div>
+          <div class="text-sm opacity-90">Management & Strategy</div>
+        </div>
       </a>
     </div>
   </div>
@@ -220,21 +381,59 @@
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-br from-juno-navy to-blue-900 text-white">
-  <div class="container-custom text-center">
-    <h2 class="text-4xl md:text-5xl font-bold mb-6">
-      Start Your Job Search Today
-    </h2>
-    <p class="text-xl mb-8 text-gray-200 max-w-2xl mx-auto">
-      Join thousands of job seekers finding their dream roles. Browse all available positions or use our advanced search.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="/jobs/" class="bg-juno-amber text-juno-navy px-8 py-4 rounded-full font-semibold hover:bg-amber-500 transition-all inline-block text-lg shadow-md hover:shadow-lg">
-        Browse All Jobs
-      </a>
-      <a href="/search/" class="bg-white text-juno-navy px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all inline-block text-lg shadow-md hover:shadow-lg">
-        Advanced Search
-      </a>
+<section class="py-24 relative overflow-hidden">
+  <!-- Animated Background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-juno-navy via-blue-900 to-juno-navy"></div>
+  <div class="absolute inset-0">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-juno-green/20 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-juno-amber/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+  </div>
+
+  <div class="container-custom relative z-10 text-center">
+    <div class="max-w-4xl mx-auto space-y-8">
+      <h2 class="text-4xl md:text-6xl font-bold text-white leading-tight">
+        Ready to Find Your
+        <span class="bg-gradient-to-r from-juno-amber to-yellow-300 bg-clip-text text-transparent"> Dream Job?</span>
+      </h2>
+      <p class="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto">
+        Join thousands of job seekers finding their perfect roles every day
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+        <a href="/jobs/" class="group relative px-10 py-5 bg-gradient-to-r from-juno-amber to-yellow-400 text-juno-navy rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden">
+          <span class="relative z-10 flex items-center gap-2">
+            Browse All Jobs
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </span>
+        </a>
+
+        <a href="/search/" class="group relative px-10 py-5 bg-white text-juno-navy rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden">
+          <span class="relative z-10 flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            Advanced Search
+          </span>
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-3 gap-8 max-w-3xl mx-auto pt-12">
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-juno-amber mb-2">{{ count|default:"1000+" }}</div>
+          <div class="text-gray-300 text-sm md:text-base">Active Jobs</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-juno-amber mb-2">50+</div>
+          <div class="text-gray-300 text-sm md:text-base">Job Sources</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-juno-amber mb-2">Daily</div>
+          <div class="text-gray-300 text-sm md:text-base">Updates</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

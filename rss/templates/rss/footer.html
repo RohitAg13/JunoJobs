@@ -1,50 +1,132 @@
-<footer class="bg-gray-100 border-t border-gray-200 mt-12">
-  <div class="container-custom py-12">
-    <div class="grid md:grid-cols-4 gap-8 mb-8">
+<footer class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white mt-20 overflow-hidden">
+  <!-- Background Decoration -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-0 left-0 w-96 h-96 bg-juno-green rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-juno-amber rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="container-custom relative z-10">
+    <!-- Main Footer Content -->
+    <div class="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
       <!-- About -->
-      <div>
-        <h3 class="font-bold text-gray-900 mb-4">Juno Jobs</h3>
-        <p class="text-gray-600 text-sm">
-          Free job board aggregating opportunities from top tech companies worldwide. Updated daily.
+      <div class="space-y-4">
+        <h3 class="text-2xl font-bold bg-gradient-to-r from-juno-amber to-yellow-300 bg-clip-text text-transparent">
+          Juno Jobs
+        </h3>
+        <p class="text-gray-300 leading-relaxed">
+          Free job board aggregating opportunities from top tech companies worldwide. Updated daily with the latest opportunities.
         </p>
+        <div class="flex items-center gap-2 text-sm text-gray-400">
+          <svg class="w-5 h-5 text-juno-green" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+          Updated Daily
+        </div>
       </div>
 
       <!-- Quick Links -->
-      <div>
-        <h3 class="font-bold text-gray-900 mb-4">Quick Links</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="/" class="text-gray-600 hover:text-juno-green transition-colors">Home</a></li>
-          <li><a href="/jobs/" class="text-gray-600 hover:text-juno-green transition-colors">Browse Jobs</a></li>
-          <li><a href="/search/" class="text-gray-600 hover:text-juno-green transition-colors">Search</a></li>
-          <li><a href="/sitemap.xml" class="text-gray-600 hover:text-juno-green transition-colors">Sitemap</a></li>
+      <div class="space-y-4">
+        <h3 class="text-lg font-bold text-white">Quick Links</h3>
+        <ul class="space-y-3">
+          <li>
+            <a href="/" class="group inline-flex items-center text-gray-300 hover:text-juno-green transition-colors">
+              <svg class="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/jobs/" class="group inline-flex items-center text-gray-300 hover:text-juno-green transition-colors">
+              <svg class="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Browse Jobs
+            </a>
+          </li>
+          <li>
+            <a href="/search/" class="group inline-flex items-center text-gray-300 hover:text-juno-green transition-colors">
+              <svg class="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Search
+            </a>
+          </li>
+          <li>
+            <a href="/sitemap.xml" class="group inline-flex items-center text-gray-300 hover:text-juno-green transition-colors">
+              <svg class="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Sitemap
+            </a>
+          </li>
         </ul>
       </div>
 
-      <!-- Categories -->
-      <div>
-        <h3 class="font-bold text-gray-900 mb-4">Popular</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="/search/?q=remote" class="text-gray-600 hover:text-juno-green transition-colors">Remote Jobs</a></li>
-          <li><a href="/search/?q=python" class="text-gray-600 hover:text-juno-green transition-colors">Python Jobs</a></li>
-          <li><a href="/search/?q=javascript" class="text-gray-600 hover:text-juno-green transition-colors">JavaScript Jobs</a></li>
-          <li><a href="/search/?q=senior" class="text-gray-600 hover:text-juno-green transition-colors">Senior Roles</a></li>
+      <!-- Popular Categories -->
+      <div class="space-y-4">
+        <h3 class="text-lg font-bold text-white">Popular</h3>
+        <ul class="space-y-3">
+          <li>
+            <a href="/search/?q=remote" class="group inline-flex items-center text-gray-300 hover:text-juno-amber transition-colors">
+              <span class="mr-2">🌍</span>
+              Remote Jobs
+            </a>
+          </li>
+          <li>
+            <a href="/search/?q=python" class="group inline-flex items-center text-gray-300 hover:text-juno-amber transition-colors">
+              <span class="mr-2">🐍</span>
+              Python Jobs
+            </a>
+          </li>
+          <li>
+            <a href="/search/?q=javascript" class="group inline-flex items-center text-gray-300 hover:text-juno-amber transition-colors">
+              <span class="mr-2">⚡</span>
+              JavaScript Jobs
+            </a>
+          </li>
+          <li>
+            <a href="/search/?q=senior" class="group inline-flex items-center text-gray-300 hover:text-juno-amber transition-colors">
+              <span class="mr-2">🎯</span>
+              Senior Roles
+            </a>
+          </li>
         </ul>
       </div>
 
       <!-- Connect -->
-      <div>
-        <h3 class="font-bold text-gray-900 mb-4">Connect</h3>
-        <p class="text-sm text-gray-600 mb-4">
-          Created by <a href="https://rohitagarwal.dev?utm_source=juno.rohitagarwal.dev" target="_blank" class="text-juno-green font-semibold hover:underline">Rohit Agarwal</a>
-        </p>
+      <div class="space-y-4">
+        <h3 class="text-lg font-bold text-white">Connect</h3>
+        <div class="space-y-3">
+          <p class="text-gray-300 leading-relaxed">
+            Created by <a href="https://rohitagarwal.dev?utm_source=juno.rohitagarwal.dev" target="_blank" class="text-juno-amber font-bold hover:text-yellow-300 transition-colors underline decoration-2 underline-offset-2">Rohit Agarwal</a>
+          </p>
+          <div class="flex items-center gap-2">
+            <a href="https://rohitagarwal.dev?utm_source=juno.rohitagarwal.dev" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 hover:bg-juno-green flex items-center justify-center transition-all hover:scale-110">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Bottom Bar -->
-    <div class="border-t border-gray-200 pt-8 text-center">
-      <p class="text-sm text-gray-600">
-        © {{ year|default:"2026" }} Juno Jobs. All rights reserved. Updated daily with the latest opportunities.
-      </p>
+    <div class="border-t border-gray-700 py-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-gray-400">
+          © {{ year|default:"2026" }} Juno Jobs. All rights reserved.
+        </p>
+        <div class="flex items-center gap-6 text-sm text-gray-400">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-juno-green animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+            </svg>
+            Built with care
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </footer>

@@ -11,39 +11,76 @@
     {% include "rss/seo/website_schema.html" %}
   </head>
 
-  <body>
-    <header>
-      <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-              <h4 class="text-white">About</h4>
-              <p class="text-muted">
-                Yolo is helping students find job opportunites.
-              </p>
+  <body class="bg-gray-50">
+    <!-- Modern Sticky Header with Backdrop Blur -->
+    <header id="main-header" class="sticky top-0 z-50 w-full transition-all duration-300">
+      <div class="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 shadow-sm">
+        <div class="container-custom">
+          <div class="flex items-center justify-between h-16 md:h-20">
+            <!-- Logo -->
+            <a href="/" class="flex items-center group">
+              <img src="{% static 'images/logo.png' %}" alt="Juno Jobs"
+                   class="h-12 md:h-16 transition-all duration-300 ease-out group-hover:scale-105 group-hover:brightness-110" />
+            </a>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-1">
+              {% include "rss/nav.html" %}
             </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+              <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
-      <div class="navbar back shadow-sm">
-        <div class="container d-flex justify-content-between">
-          <a href="/" class="navbar-brand d-flex align-items-center">
-            <img src="{% static 'images/logo.png' %}" alt="Juno Jobs" class="logo-img" />
-            <style>
-              .logo-img {
-                height: 64px;
-                transition: all 0.3s ease;
-              }
-              .logo-img:hover {
-                transform: translateY(-2px);
-                filter: brightness(1.1);
-              }
-            </style>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden hidden bg-white border-b border-gray-200 shadow-lg">
+        <div class="container-custom py-4 space-y-2">
+          <a href="/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium">
+            Home
           </a>
-          {% include "rss/nav.html" %}
+          <a href="/jobs/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium">
+            Browse Jobs
+          </a>
+          <a href="/search/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium">
+            Search
+          </a>
         </div>
       </div>
     </header>
+
+    <script>
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+
+      // Scroll behavior for header
+      let lastScroll = 0;
+      const header = document.getElementById('main-header');
+
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 10) {
+          header.classList.add('shadow-md');
+        } else {
+          header.classList.remove('shadow-md');
+        }
+
+        lastScroll = currentScroll;
+      });
+    </script>
 
     {% block content %}{% endblock %} {% include "rss/footer.html" %}
   </body>

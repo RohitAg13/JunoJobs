@@ -5,13 +5,25 @@
 
 {% block content %}
     <main role="main" class="bg-gray-50 min-h-screen">
-        <!-- Search Header -->
-        <div class="bg-gradient-to-br from-juno-navy to-blue-900 text-white py-8">
-            <div class="container-custom">
-                <h1 class="text-3xl md:text-4xl font-bold mb-4">
-                    {% if q %}Search: "{{ q }}"{% else %}Browse All Jobs{% endif %}
-                </h1>
-                {% include "rss/search_bar.html" %}
+        <!-- Modern Search Header -->
+        <div class="relative bg-gradient-to-br from-juno-navy via-blue-900 to-juno-navy text-white py-16 overflow-hidden">
+            <!-- Animated Background -->
+            <div class="absolute inset-0">
+                <div class="absolute top-0 left-1/4 w-64 h-64 bg-juno-green/20 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-juno-amber/20 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="container-custom relative z-10">
+                <div class="max-w-4xl mx-auto space-y-6 text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                        {% if q %}
+                            <span class="text-juno-amber">"{{ q }}"</span> Jobs
+                        {% else %}
+                            Browse All Jobs
+                        {% endif %}
+                    </h1>
+                    {% include "rss/search_bar.html" %}
+                </div>
             </div>
         </div>
 
@@ -40,42 +52,75 @@
                         </div>
                     </div>
 
-                <!-- Job Results List -->
+                <!-- Modern Job Cards with Animations -->
                 {% if hits %}
-                <div class="space-y-4">
+                <div class="space-y-6">
                     {% for hit in hits %}
-                    <div class="bg-white rounded-lg border-l-4 border-juno-green p-6 hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+                    <div class="job-card group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-transparent hover:border-juno-green/30">
+                        <!-- Gradient Overlay on Hover -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-juno-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
                         <a href="/job/{{ hit.title|slugify }}/?id={{ hit.meta.id|urlencode }}&q={{ q }}"
-                           class="block hover:no-underline">
-                            <div class="flex justify-between items-start mb-3">
-                                <h3 class="text-xl font-bold text-gray-900 hover:text-juno-green transition-colors flex-1 pr-4">
-                                    {{ hit.title }}
-                                </h3>
-                                <div class="flex flex-col items-end gap-1">
-                                    <span class="text-sm text-gray-500 whitespace-nowrap">
-                                        {{ hit.pubDate|date:"M d, Y" }}
-                                    </span>
-                                    {% if hit.pubDate|timesince < "1 day" %}
-                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-semibold">
-                                        NEW
-                                    </span>
-                                    {% endif %}
+                           class="block p-6 md:p-8 hover:no-underline relative z-10">
+                            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                                <!-- Title and Badges -->
+                                <div class="flex-1">
+                                    <div class="flex items-start gap-3 mb-3">
+                                        <!-- Icon Circle -->
+                                        <div class="w-12 h-12 bg-gradient-to-br from-juno-green to-green-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-500 shrink-0">
+                                            💼
+                                        </div>
+                                        <div class="flex-1">
+                                            <h3 class="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-juno-green transition-colors leading-tight mb-2">
+                                                {{ hit.title }}
+                                            </h3>
+                                            <div class="flex items-center gap-2 flex-wrap">
+                                                {% if hit.pubDate|timesince < "1 day" %}
+                                                <span class="inline-flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full text-xs font-bold shadow-sm animate-pulse">
+                                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    NEW
+                                                </span>
+                                                {% endif %}
+                                                <span class="text-sm text-gray-500 flex items-center gap-1">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                    </svg>
+                                                    {{ hit.pubDate|date:"M d, Y" }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Arrow Icon -->
+                                <div class="hidden md:block shrink-0">
+                                    <div class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-juno-green flex items-center justify-center transition-all duration-300">
+                                        <svg class="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
-                            <p class="text-gray-700 mb-4 line-clamp-3">
-                                {{ hit.body|striptags|truncatechars:250 }}
+
+                            <!-- Description -->
+                            <p class="text-gray-600 leading-relaxed mb-4 line-clamp-2">
+                                {{ hit.body|striptags|truncatechars:200 }}
                             </p>
+
+                            <!-- Tags -->
                             <div class="flex items-center gap-2 flex-wrap">
                                 {% if hit.source %}
-                                <span class="inline-flex items-center gap-1 px-3 py-1 bg-juno-green/10 text-juno-green rounded-full text-sm font-medium">
+                                <span class="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-juno-green/10 to-green-600/10 text-juno-green rounded-full text-sm font-semibold border border-juno-green/20 hover:border-juno-green/40 transition-colors">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                                     </svg>
                                     {{ hit.source }}
                                 </span>
                                 {% endif %}
                                 {% if hit.category %}
-                                <span class="inline-flex items-center gap-1 px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm font-medium">
+                                <span class="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-juno-amber/10 to-amber-600/10 text-amber-700 rounded-full text-sm font-semibold border border-juno-amber/20 hover:border-juno-amber/40 transition-colors">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
                                     </svg>
@@ -87,6 +132,29 @@
                     </div>
                     {% endfor %}
                 </div>
+
+                <style>
+                    @keyframes cardSlideIn {
+                        from {
+                            opacity: 0;
+                            transform: translateY(20px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+
+                    .job-card {
+                        animation: cardSlideIn 0.5s ease-out forwards;
+                    }
+
+                    .job-card:nth-child(1) { animation-delay: 0.05s; }
+                    .job-card:nth-child(2) { animation-delay: 0.1s; }
+                    .job-card:nth-child(3) { animation-delay: 0.15s; }
+                    .job-card:nth-child(4) { animation-delay: 0.2s; }
+                    .job-card:nth-child(5) { animation-delay: 0.25s; }
+                </style>
                 {% else %}
                 <div class="bg-white rounded-lg p-12 text-center shadow-sm">
                     <div class="text-6xl mb-4">🔍</div>

@@ -1,5 +1,16 @@
-<nav class="flex items-center gap-6">
-  <a class="text-gray-700 hover:text-juno-green transition-colors font-medium" href="/">Home</a>
-  <a class="text-gray-700 hover:text-juno-green transition-colors font-medium" href="/jobs/">Browse Jobs</a>
-  <a class="text-gray-700 hover:text-juno-green transition-colors font-medium" href="/search/">Search</a>
+<nav class="flex items-center gap-2">
+  <a class="relative px-4 py-2 text-gray-700 hover:text-juno-green transition-all font-medium rounded-lg hover:bg-gray-50 group" href="/">
+    <span class="relative z-10">Home</span>
+    <span class="absolute inset-x-0 bottom-0 h-0.5 bg-juno-green transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+  </a>
+  <a class="relative px-4 py-2 text-gray-700 hover:text-juno-green transition-all font-medium rounded-lg hover:bg-gray-50 group" href="/jobs/">
+    <span class="relative z-10">Browse Jobs</span>
+    <span class="absolute inset-x-0 bottom-0 h-0.5 bg-juno-green transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+  </a>
+  <a class="px-6 py-2.5 bg-gradient-to-r from-juno-green to-green-600 text-white font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300 ml-2" href="/search/">
+    <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+    Search Jobs
+  </a>
 </nav>
