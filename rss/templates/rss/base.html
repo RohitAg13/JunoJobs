@@ -36,29 +36,34 @@
               {% include "rss/nav.html" %}
             </nav>
 
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            <!-- Mobile Menu Button with Animation -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors relative"
                     aria-label="Open mobile menu"
                     aria-expanded="false"
                     aria-controls="mobile-menu">
-              <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              <span class="sr-only">Toggle menu</span>
+              <div class="w-6 h-5 relative flex flex-col justify-between">
+                <span id="menu-line-1" class="w-full h-0.5 bg-gray-700 rounded transition-all duration-300 origin-center"></span>
+                <span id="menu-line-2" class="w-full h-0.5 bg-gray-700 rounded transition-all duration-300"></span>
+                <span id="menu-line-3" class="w-full h-0.5 bg-gray-700 rounded transition-all duration-300 origin-center"></span>
+              </div>
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Mobile Menu -->
-      <nav id="mobile-menu" class="md:hidden hidden bg-white border-b border-gray-200 shadow-lg" aria-label="Mobile navigation">
+      <!-- Mobile Menu with Slide Animation -->
+      <nav id="mobile-menu" class="md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-white border-b border-gray-200 shadow-lg"
+           style="max-height: 0;"
+           aria-label="Mobile navigation">
         <div class="container-custom py-4 space-y-2">
-          <a href="/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium" aria-label="Go to home page">
+          <a href="/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium active:scale-95" aria-label="Go to home page">
             Home
           </a>
-          <a href="/jobs/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium" aria-label="Browse all jobs">
+          <a href="/jobs/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium active:scale-95" aria-label="Browse all jobs">
             Browse Jobs
           </a>
-          <a href="/search/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium" aria-label="Search for jobs">
+          <a href="/search/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium active:scale-95" aria-label="Search for jobs">
             Search
           </a>
         </div>
@@ -66,16 +71,33 @@
     </header>
 
     <script>
-      // Mobile menu toggle
+      // Mobile menu toggle with smooth animations
       const mobileMenuBtn = document.getElementById('mobile-menu-btn');
       const mobileMenu = document.getElementById('mobile-menu');
+      const menuLine1 = document.getElementById('menu-line-1');
+      const menuLine2 = document.getElementById('menu-line-2');
+      const menuLine3 = document.getElementById('menu-line-3');
 
       if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener('click', () => {
           const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
           mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
           mobileMenuBtn.setAttribute('aria-label', isExpanded ? 'Open mobile menu' : 'Close mobile menu');
-          mobileMenu.classList.toggle('hidden');
+
+          // Animate menu
+          if (!isExpanded) {
+            mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+            // Animate hamburger to X
+            menuLine1.style.transform = 'rotate(45deg) translateY(8px)';
+            menuLine2.style.opacity = '0';
+            menuLine3.style.transform = 'rotate(-45deg) translateY(-8px)';
+          } else {
+            mobileMenu.style.maxHeight = '0';
+            // Animate X to hamburger
+            menuLine1.style.transform = 'rotate(0) translateY(0)';
+            menuLine2.style.opacity = '1';
+            menuLine3.style.transform = 'rotate(0) translateY(0)';
+          }
         });
       }
 

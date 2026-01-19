@@ -1,4 +1,5 @@
 import json
+import logging
 
 import dateutil
 import math
@@ -18,6 +19,8 @@ from rss.sources import sources
 from rss.query_parser import build_search_query
 
 from elasticsearch.exceptions import NotFoundError
+
+logger = logging.getLogger(__name__)
 
 
 def create_index_if_not_exists(index_name):
@@ -227,7 +230,11 @@ def job(request, title=None):
         raise Http404("ID does not exists")
 
     doc = res.hits[0]
-    postproc(doc)
+    try:
+        postproc(doc)
+    except Exception as e:
+        logger.error(f"Error in postproc for doc {id}: {str(e)}", exc_info=True)
+        # Continue rendering even if postproc fails
     context = {"q": q, "hit": doc}
     return render(request, "rss/job.html", context)
 

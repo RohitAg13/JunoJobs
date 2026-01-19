@@ -14,7 +14,8 @@ postproc_dict = {
 
 
 def postproc(doc):
-    if doc.source in postproc_dict:
-        postproc_dict[doc.source](doc)
+    source = getattr(doc, 'source', None)
+    if source and source in postproc_dict:
+        postproc_dict[source](doc)
     # else:
     #     default_postproc(doc)
