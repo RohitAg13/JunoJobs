@@ -368,22 +368,21 @@
 </section>
 
 <!-- CTA Section -->
-<section class="py-24 relative overflow-hidden">
-  <!-- Animated Background -->
-  <div class="absolute inset-0 bg-gradient-to-br from-juno-navy via-blue-900 to-juno-navy"></div>
-  <div class="absolute inset-0">
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-juno-green/20 rounded-full blur-3xl animate-pulse"></div>
-    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-juno-amber/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+<section class="py-24 relative overflow-hidden bg-gradient-to-br from-juno-navy via-blue-900 to-juno-navy">
+  <!-- Animated Background Decoration -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-juno-green opacity-20 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-juno-amber opacity-20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
   </div>
 
   <div class="container-custom relative z-10 text-center">
     <div class="max-w-4xl mx-auto space-y-8">
-      <h2 class="text-4xl md:text-6xl font-bold text-white leading-tight">
-        Start Your
-        <span class="bg-gradient-to-r from-juno-amber to-yellow-300 bg-clip-text text-transparent"> Job Search</span>
+      <h2 class="text-4xl md:text-6xl font-bold leading-tight">
+        <span class="text-white">Start Your</span>
+        <span class="text-juno-amber"> Job Search</span>
       </h2>
-      <p class="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto">
-        {{ count|default:"1000+" }} opportunities waiting for you
+      <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto">
+        {{ count|default:"17,000+" }} opportunities waiting for you
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
@@ -407,24 +406,24 @@
       </div>
 
       <!-- Stats with Enhanced Visual Design -->
-      <div class="grid grid-cols-3 gap-6 md:gap-8 max-w-3xl mx-auto pt-12">
-        <div class="group text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-juno-amber/30 transition-all duration-300 hover:scale-105">
-          <div class="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-juno-amber to-yellow-300 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">
-            {{ count|default:"1000+" }}
+      <div class="grid grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto pt-12">
+        <div class="group text-center p-4 md:p-6 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 hover:bg-opacity-15 hover:border-juno-amber hover:border-opacity-40 transition-all duration-300 hover:scale-105">
+          <div class="text-2xl md:text-4xl font-extrabold text-juno-amber mb-1 md:mb-2 group-hover:scale-110 transition-transform">
+            {{ count|default:"17,000+" }}
           </div>
-          <div class="text-gray-200 text-xs md:text-base font-medium">Active Jobs</div>
+          <div class="text-gray-300 text-xs md:text-sm font-medium">Active Jobs</div>
         </div>
-        <div class="group text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-juno-amber/30 transition-all duration-300 hover:scale-105">
-          <div class="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-juno-amber to-yellow-300 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">
+        <div class="group text-center p-4 md:p-6 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 hover:bg-opacity-15 hover:border-juno-amber hover:border-opacity-40 transition-all duration-300 hover:scale-105">
+          <div class="text-2xl md:text-4xl font-extrabold text-juno-amber mb-1 md:mb-2 group-hover:scale-110 transition-transform">
             50+
           </div>
-          <div class="text-gray-200 text-xs md:text-base font-medium">Job Sources</div>
+          <div class="text-gray-300 text-xs md:text-sm font-medium">Job Sources</div>
         </div>
-        <div class="group text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-juno-amber/30 transition-all duration-300 hover:scale-105">
-          <div class="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-juno-amber to-yellow-300 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">
+        <div class="group text-center p-4 md:p-6 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 hover:bg-opacity-15 hover:border-juno-amber hover:border-opacity-40 transition-all duration-300 hover:scale-105">
+          <div class="text-2xl md:text-4xl font-extrabold text-juno-amber mb-1 md:mb-2 group-hover:scale-110 transition-transform">
             Daily
           </div>
-          <div class="text-gray-200 text-xs md:text-base font-medium">Updates</div>
+          <div class="text-gray-300 text-xs md:text-sm font-medium">Updates</div>
         </div>
       </div>
     </div>
