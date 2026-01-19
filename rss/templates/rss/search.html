@@ -157,6 +157,36 @@
                                 </div>
                             </div>
                         </a>
+
+                        <!-- Job Card Quick Actions -->
+                        <div class="job-card-actions absolute top-3 right-3 sm:top-4 sm:right-4 flex gap-2 z-10">
+                            <!-- Save Job Button -->
+                            <button
+                                data-save-job
+                                data-job-id="{{ hit.meta.id }}"
+                                class="save-job-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 backdrop-blur-sm border-2 border-gray-200 flex items-center justify-center hover:bg-white hover:border-juno-green hover:text-juno-green transition-all shadow-md hover:shadow-lg group/save"
+                                aria-label="Save job"
+                                title="Save job for later"
+                            >
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover/save:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+                                </svg>
+                            </button>
+
+                            <!-- Share Job Button -->
+                            <button
+                                data-share-job
+                                data-job-title="{{ hit.title }}"
+                                data-job-url="{{ request.scheme }}://{{ request.get_host }}/job/{{ hit.title|slugify }}/?id={{ hit.meta.id|urlencode }}"
+                                class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 backdrop-blur-sm border-2 border-gray-200 flex items-center justify-center hover:bg-white hover:border-blue-500 hover:text-blue-500 transition-all shadow-md hover:shadow-lg group/share"
+                                aria-label="Share job"
+                                title="Share this job"
+                            >
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover/share:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+                                </svg>
+                            </button>
+                        </div>
                     </article>
                     {% endfor %}
                 </div>

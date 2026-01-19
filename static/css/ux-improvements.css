@@ -1,0 +1,707 @@
+/* Juno Jobs - UX Improvements CSS
+ * Custom styles for enhanced user experience
+ */
+
+/* ============================================
+   PHASE 1: Focus Styles & Basic Interactions
+   ============================================ */
+
+/* Enhanced focus styles for accessibility */
+*:focus-visible {
+  outline: 3px solid #00AA48 !important;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #00AA48 !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 170, 72, 0.1);
+}
+
+/* Better button hover states */
+.btn-primary,
+.btn-secondary,
+button[type="submit"],
+a[class*="bg-juno-green"],
+a[class*="bg-gradient"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover,
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 170, 72, 0.3);
+}
+
+/* Back to top button */
+#back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 40;
+  padding: 12px;
+  background: linear-gradient(135deg, #00AA48 0%, #008a3a 100%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 170, 72, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+#back-to-top:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 170, 72, 0.5);
+}
+
+#back-to-top:active {
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Loading spinner */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading .spinner {
+  display: inline-block;
+}
+
+.loading .button-text {
+  opacity: 0;
+  position: absolute;
+}
+
+/* Loading state for buttons */
+button.loading,
+a.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ============================================
+   PHASE 2: Enhanced Components
+   ============================================ */
+
+/* Better pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 0;
+}
+
+.pagination-btn {
+  min-width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+  color: #6b7280;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.pagination-btn:hover:not(:disabled):not(.active) {
+  border-color: #00AA48;
+  color: #00AA48;
+  transform: translateY(-1px);
+}
+
+.pagination-btn.active {
+  background: #00AA48;
+  border-color: #00AA48;
+  color: white;
+  font-weight: 600;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  margin-left: 16px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 0;
+  font-size: 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.breadcrumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.breadcrumbs a {
+  color: #6b7280;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+  color: #00AA48;
+}
+
+.breadcrumbs .separator {
+  color: #d1d5db;
+}
+
+.breadcrumbs .current {
+  color: #111827;
+  font-weight: 500;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Job card enhancements */
+.job-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.job-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.job-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s;
+}
+
+.job-card:hover .job-card-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.job-quick-action {
+  padding: 8px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.job-quick-action:hover {
+  background: #f3f4f6;
+  color: #00AA48;
+  transform: scale(1.1);
+}
+
+.job-quick-action.active {
+  color: #00AA48;
+}
+
+/* Filter enhancements */
+.filter-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.filter-option:hover {
+  background: #f9fafb;
+}
+
+.filter-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 2px 8px;
+  border-radius: 12px;
+  min-width: 28px;
+  text-align: center;
+}
+
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(0, 170, 72, 0.1);
+  color: #00AA48;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.filter-chip:hover {
+  background: rgba(0, 170, 72, 0.15);
+  transform: scale(1.05);
+}
+
+.filter-chip button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.filter-chip button:hover {
+  transform: scale(1.2);
+}
+
+/* ============================================
+   PHASE 3: Advanced Features
+   ============================================ */
+
+/* Hero section optimization */
+.hero-section {
+  min-height: 60vh;
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    min-height: 65vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-section {
+    min-height: 70vh;
+  }
+}
+
+/* Animated job counter */
+.job-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(0, 170, 72, 0.1);
+  border-radius: 24px;
+  margin-bottom: 16px;
+}
+
+.pulse-dot {
+  position: relative;
+  display: flex;
+  width: 12px;
+  height: 12px;
+}
+
+.pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #00AA48;
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.pulse-dot::after {
+  content: '';
+  position: relative;
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #00AA48;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Enhanced trust badges */
+.trust-badge {
+  position: relative;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.trust-badge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 170, 72, 0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.trust-badge:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 170, 72, 0.3);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.trust-badge:hover::before {
+  opacity: 1;
+}
+
+.trust-badge-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(0, 170, 72, 0.15) 0%, rgba(0, 170, 72, 0.05) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: transform 0.3s;
+}
+
+.trust-badge:hover .trust-badge-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Related jobs section */
+.related-job-card {
+  padding: 16px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: block;
+}
+
+.related-job-card:hover {
+  border-color: #00AA48;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateX(4px);
+}
+
+/* Company profile card */
+.company-card {
+  background: linear-gradient(135deg, #f9fafb 0%, white 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.company-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.company-stat-label {
+  color: #6b7280;
+}
+
+.company-stat-value {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ============================================
+   PHASE 4: Micro-animations & Polish
+   ============================================ */
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-text {
+  height: 16px;
+  margin-bottom: 8px;
+}
+
+.skeleton-title {
+  height: 24px;
+  width: 60%;
+  margin-bottom: 12px;
+}
+
+.skeleton-card {
+  height: 120px;
+  margin-bottom: 16px;
+}
+
+/* Smooth page transitions */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  main {
+    animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Success animation for saved jobs */
+@keyframes saveSuccess {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+}
+
+.save-success {
+  animation: saveSuccess 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Toast notifications */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #111827;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 50;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-success {
+  background: #00AA48;
+}
+
+.toast-error {
+  background: #ef4444;
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Category card improvements */
+.category-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.category-card:hover::after {
+  opacity: 1;
+}
+
+.category-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
+
+.category-icon {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-card:hover .category-icon {
+  transform: scale(1.2) rotate(-5deg);
+}
+
+/* Stats counter animation */
+.stat-number {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  transition: all 0.3s;
+}
+
+.stat-card:hover .stat-number {
+  transform: scale(1.1);
+  color: #F59E0B;
+}
+
+/* Enhanced search bar */
+.search-bar-enhanced {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-bar-enhanced:hover {
+  transform: scale(1.01);
+}
+
+.search-bar-enhanced:focus-within {
+  transform: scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 170, 72, 0.2);
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  #back-to-top {
+    bottom: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .pagination {
+    gap: 4px;
+  }
+
+  .pagination-btn {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+}
+
+/* Print styles */
+@media print {
+  #back-to-top,
+  .job-card-actions,
+  .toast {
+    display: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  *:focus-visible {
+    outline-width: 4px;
+    outline-offset: 3px;
+  }
+
+  .btn-primary,
+  .pagination-btn.active {
+    border-width: 3px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  #back-to-top,
+  .job-card,
+  .trust-badge,
+  .category-card {
+    transform: none !important;
+  }
+}
