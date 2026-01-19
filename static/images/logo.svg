@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" fill="none">
+  <!-- Network Icon -->
+  <g id="icon">
+    <!-- Connecting Lines -->
+    <path d="M60 100 L100 140" stroke="#C9A961" stroke-width="12" stroke-linecap="round"/>
+    <path d="M100 60 L140 100" stroke="#FBBF24" stroke-width="12" stroke-linecap="round"/>
+    <path d="M60 180 L100 140" stroke="#213D6B" stroke-width="12" stroke-linecap="round"/>
+    <path d="M140 180 L100 140" stroke="#4A6FA5" stroke-width="12" stroke-linecap="round"/>
+    <path d="M140 100 L100 60" stroke="#213D6B" stroke-width="12" stroke-linecap="round"/>
+    <path d="M100 140 L140 100" stroke="#C9A961" stroke-width="12" stroke-linecap="round"/>
+    <path d="M60 100 L100 60" stroke="#FBBF24" stroke-width="12" stroke-linecap="round"/>
+    <path d="M140 180 L180 140" stroke="#C9A961" stroke-width="12" stroke-linecap="round"/>
+
+    <!-- Nodes (Circles) -->
+    <circle cx="60" cy="100" r="16" fill="#C9A961"/>
+    <circle cx="60" cy="180" r="16" fill="#FBBF24"/>
+    <circle cx="100" cy="60" r="16" fill="#C9A961"/>
+    <circle cx="100" cy="140" r="16" fill="#213D6B"/>
+    <circle cx="140" cy="100" r="16" fill="#FBBF24"/>
+    <circle cx="140" cy="180" r="16" fill="#C9A961"/>
+    <circle cx="180" cy="140" r="16" fill="#FBBF24"/>
+  </g>
+
+  <!-- Juno Jobs Text -->
+  <g id="text">
+    <text x="260" y="180" font-family="system-ui, -apple-system, sans-serif" font-size="120" font-weight="700" fill="#213D6B" letter-spacing="-2">
+      Juno Jobs
+    </text>
+  </g>
+</svg>

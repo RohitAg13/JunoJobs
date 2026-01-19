@@ -15,6 +15,7 @@ from elasticsearch_dsl.connections import connections
 from rss.postproc import postproc
 from rss.models import Feedback
 from rss.sources import sources
+from rss.query_parser import build_search_query
 
 from elasticsearch.exceptions import NotFoundError
 
@@ -114,15 +115,9 @@ def search(request):
     # Build query
     query = Search(index="rss")
 
-    # Base query with text search
+    # Base query with natural language search (no boolean operators needed)
     if q:
-        base_query = {
-            "query_string": {
-                "fields": ["title^2", "body"],
-                "query": q,
-                "default_operator": "AND"
-            }
-        }
+        base_query = build_search_query(q)
     else:
         base_query = {"match_all": {}}
 

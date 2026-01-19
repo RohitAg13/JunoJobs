@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Simplified network icon for favicon -->
+  <rect width="200" height="200" rx="40" fill="#213D6B"/>
+
+  <!-- Network Icon (simplified and centered) -->
+  <g transform="translate(50, 50)">
+    <!-- Connecting Lines -->
+    <path d="M10 20 L50 50" stroke="#C9A961" stroke-width="8" stroke-linecap="round"/>
+    <path d="M50 10 L90 50" stroke="#FBBF24" stroke-width="8" stroke-linecap="round"/>
+    <path d="M10 80 L50 50" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+    <path d="M90 80 L50 50" stroke="#00AA48" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- Nodes -->
+    <circle cx="10" cy="20" r="10" fill="#C9A961"/>
+    <circle cx="10" cy="80" r="10" fill="#FBBF24"/>
+    <circle cx="50" cy="10" r="10" fill="#C9A961"/>
+    <circle cx="50" cy="50" r="10" fill="#ffffff"/>
+    <circle cx="90" cy="50" r="10" fill="#FBBF24"/>
+    <circle cx="90" cy="80" r="10" fill="#00AA48"/>
+  </g>
+</svg>

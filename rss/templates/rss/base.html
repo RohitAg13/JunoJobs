@@ -12,25 +12,36 @@
   </head>
 
   <body class="bg-gray-50">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-juno-green focus:text-white focus:rounded-lg focus:shadow-xl focus:font-semibold">
+      Skip to main content
+    </a>
+
     <!-- Modern Sticky Header with Backdrop Blur -->
-    <header id="main-header" class="sticky top-0 z-50 w-full transition-all duration-300">
+    <header id="main-header" class="sticky top-0 z-50 w-full transition-all duration-300" role="banner">
       <div class="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 shadow-sm">
         <div class="container-custom">
           <div class="flex items-center justify-between h-16 md:h-20">
-            <!-- Logo -->
-            <a href="/" class="flex items-center group">
-              <img src="{% static 'images/logo.png' %}" alt="Juno Jobs"
-                   class="h-12 md:h-16 transition-all duration-300 ease-out group-hover:scale-105 group-hover:brightness-110" />
+            <!-- Logo with SVG and fallback -->
+            <a href="/" class="flex items-center group" aria-label="Juno Jobs Home">
+              <picture>
+                <source srcset="{% static 'images/logo.svg' %}" type="image/svg+xml">
+                <img src="{% static 'images/logo.png' %}" alt="Juno Jobs Logo" width="200" height="64"
+                     class="h-12 md:h-16 w-auto transition-all duration-300 ease-out group-hover:scale-105 group-hover:brightness-110" />
+              </picture>
             </a>
 
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center gap-1">
+            <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
               {% include "rss/nav.html" %}
-            </div>
+            </nav>
 
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
-              <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    aria-label="Open mobile menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu">
+              <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
@@ -39,19 +50,19 @@
       </div>
 
       <!-- Mobile Menu -->
-      <div id="mobile-menu" class="md:hidden hidden bg-white border-b border-gray-200 shadow-lg">
+      <nav id="mobile-menu" class="md:hidden hidden bg-white border-b border-gray-200 shadow-lg" aria-label="Mobile navigation">
         <div class="container-custom py-4 space-y-2">
-          <a href="/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium">
+          <a href="/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium" aria-label="Go to home page">
             Home
           </a>
-          <a href="/jobs/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium">
+          <a href="/jobs/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium" aria-label="Browse all jobs">
             Browse Jobs
           </a>
-          <a href="/search/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium">
+          <a href="/search/" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-juno-green transition-all font-medium" aria-label="Search for jobs">
             Search
           </a>
         </div>
-      </div>
+      </nav>
     </header>
 
     <script>
@@ -61,6 +72,9 @@
 
       if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener('click', () => {
+          const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+          mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+          mobileMenuBtn.setAttribute('aria-label', isExpanded ? 'Open mobile menu' : 'Close mobile menu');
           mobileMenu.classList.toggle('hidden');
         });
       }
@@ -82,6 +96,10 @@
       });
     </script>
 
-    {% block content %}{% endblock %} {% include "rss/footer.html" %}
+    <main id="main-content" role="main">
+      {% block content %}{% endblock %}
+    </main>
+
+    {% include "rss/footer.html" %}
   </body>
 </html>

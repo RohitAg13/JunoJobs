@@ -1,0 +1,280 @@
+/**
+ * Keyboard Navigation & Focus Styles
+ * Enhanced accessibility for keyboard users
+ * WCAG 2.1 Level AA Compliant
+ */
+
+/* ===================================
+   Focus Visible Enhancement
+   =================================== */
+
+/* Remove default outline, replace with custom focus styles */
+*:focus {
+    outline: none;
+}
+
+/* Enhanced focus-visible for modern browsers */
+*:focus-visible {
+    outline: 3px solid #00AA48;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ===================================
+   Navigation Links
+   =================================== */
+
+nav a:focus-visible {
+    outline: 3px solid #00AA48;
+    outline-offset: 4px;
+    background-color: rgba(0, 170, 72, 0.05);
+    box-shadow: 0 0 0 4px rgba(0, 170, 72, 0.1);
+}
+
+/* ===================================
+   Buttons
+   =================================== */
+
+button:focus-visible,
+[type="submit"]:focus-visible,
+[type="button"]:focus-visible {
+    outline: 3px solid #00AA48;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0, 170, 72, 0.2);
+    transform: scale(1.02);
+}
+
+/* Primary buttons (CTA) */
+.bg-gradient-to-r:focus-visible {
+    outline: 3px solid #FBBF24;
+    box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.3), 0 10px 20px rgba(0, 170, 72, 0.2);
+}
+
+/* ===================================
+   Form Inputs
+   =================================== */
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    border-color: #00AA48 !important;
+    box-shadow: 0 0 0 4px rgba(0, 170, 72, 0.15);
+    outline: none;
+}
+
+/* Search input specific */
+input[name="q"]:focus-visible {
+    border-color: #00AA48 !important;
+    box-shadow: 0 0 0 4px rgba(0, 170, 72, 0.1), 0 4px 12px rgba(0, 170, 72, 0.15);
+}
+
+/* ===================================
+   Cards & Interactive Elements
+   =================================== */
+
+/* Job cards */
+article.job-card:focus-within {
+    border-color: #00AA48;
+    box-shadow: 0 4px 12px rgba(0, 170, 72, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Card links */
+a:has(article):focus-visible,
+a.job-card-link:focus-visible {
+    outline: 3px solid #00AA48;
+    outline-offset: 4px;
+    border-radius: 12px;
+}
+
+/* Category cards */
+.category-card:focus-visible {
+    outline: 3px solid #00AA48;
+    outline-offset: 3px;
+    box-shadow: 0 8px 20px rgba(0, 170, 72, 0.2);
+    transform: translateY(-4px) scale(1.02);
+}
+
+/* ===================================
+   Filter Checkboxes & Radio Buttons
+   =================================== */
+
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+    outline: 3px solid #00AA48;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0, 170, 72, 0.15);
+}
+
+/* Custom checkbox/radio labels */
+input[type="checkbox"]:focus-visible + label,
+input[type="radio"]:focus-visible + label {
+    background-color: rgba(0, 170, 72, 0.05);
+    border-color: #00AA48;
+}
+
+/* ===================================
+   Mobile Menu Button
+   =================================== */
+
+#mobile-menu-btn:focus-visible {
+    outline: 3px solid #00AA48;
+    outline-offset: 2px;
+    background-color: rgba(0, 170, 72, 0.1);
+    box-shadow: 0 0 0 4px rgba(0, 170, 72, 0.15);
+}
+
+/* ===================================
+   Skip Navigation Link
+   =================================== */
+
+.sr-only:focus {
+    position: fixed !important;
+    top: 1rem;
+    left: 1rem;
+    z-index: 9999;
+    padding: 1rem 1.5rem;
+    background: #00AA48;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 170, 72, 0.4);
+    animation: skipLinkSlideIn 0.3s ease-out;
+}
+
+@keyframes skipLinkSlideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ===================================
+   Footer Links
+   =================================== */
+
+footer a:focus-visible {
+    outline: 3px solid #FBBF24;
+    outline-offset: 3px;
+    background-color: rgba(251, 191, 36, 0.1);
+    box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.15);
+}
+
+/* ===================================
+   Collapsible Sections (Filters)
+   =================================== */
+
+button[aria-expanded]:focus-visible {
+    outline: 3px solid #00AA48;
+    outline-offset: 2px;
+    background-color: rgba(0, 170, 72, 0.05);
+    box-shadow: 0 0 0 4px rgba(0, 170, 72, 0.1);
+}
+
+/* ===================================
+   Tab Order Enhancement
+   =================================== */
+
+/* Ensure proper tab order visibility */
+[tabindex="0"]:focus-visible,
+[tabindex="-1"]:focus-visible {
+    outline: 3px solid #00AA48;
+    outline-offset: 2px;
+}
+
+/* ===================================
+   Logo Focus
+   =================================== */
+
+a[aria-label*="Home"]:focus-visible img,
+a[aria-label*="Logo"]:focus-visible img {
+    outline: 3px solid #00AA48;
+    outline-offset: 4px;
+    border-radius: 8px;
+    box-shadow: 0 0 0 4px rgba(0, 170, 72, 0.15);
+}
+
+/* ===================================
+   Quick Search Suggestion Buttons
+   =================================== */
+
+button[onclick*="getElementById"]:focus-visible {
+    outline: 2px solid #00AA48;
+    outline-offset: 2px;
+    background-color: rgba(0, 170, 72, 0.15) !important;
+    border-color: #00AA48 !important;
+    transform: scale(1.05);
+}
+
+/* ===================================
+   High Contrast Mode Support
+   =================================== */
+
+@media (prefers-contrast: high) {
+    *:focus-visible {
+        outline-width: 4px;
+        outline-offset: 3px;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+        box-shadow: 0 0 0 6px rgba(0, 170, 72, 0.3);
+    }
+}
+
+/* ===================================
+   Reduced Motion Support
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *:focus-visible {
+        transition: none;
+        animation: none;
+    }
+
+    .sr-only:focus {
+        animation: none;
+    }
+}
+
+/* ===================================
+   Focus Trap for Modals (Future Use)
+   =================================== */
+
+[role="dialog"]:focus-visible,
+[role="alertdialog"]:focus-visible {
+    outline: 4px solid #00AA48;
+    outline-offset: -4px;
+}
+
+/* ===================================
+   Utility Classes
+   =================================== */
+
+/* Force focus visible */
+.force-focus-visible:focus {
+    outline: 3px solid #00AA48 !important;
+    outline-offset: 2px !important;
+}
+
+/* Remove focus visible (use sparingly) */
+.no-focus-visible:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Custom focus color variations */
+.focus-amber:focus-visible {
+    outline-color: #FBBF24;
+    box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.2);
+}
+
+.focus-navy:focus-visible {
+    outline-color: #213D6B;
+    box-shadow: 0 0 0 4px rgba(33, 61, 107, 0.2);
+}

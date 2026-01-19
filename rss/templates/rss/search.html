@@ -29,10 +29,38 @@
 
         <!-- Main Content -->
         <div class="container-custom py-8">
-            <!-- Single Column Layout (Filters temporarily disabled) -->
-            <div>
+            <!-- Two Column Layout: Filters + Results -->
+            <div class="grid lg:grid-cols-[300px_1fr] gap-8">
+                <!-- Filters Sidebar (Desktop) -->
+                <aside class="hidden lg:block">
+                    {% include "rss/filters.html" %}
+                </aside>
+
                 <!-- Results Column -->
                 <div>
+                    <!-- Mobile Filter Button -->
+                    <div class="lg:hidden mb-4">
+                        <button
+                            onclick="document.getElementById('mobile-filters').classList.toggle('hidden')"
+                            class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-gray-200 rounded-xl text-gray-700 font-semibold hover:border-juno-green hover:text-juno-green transition-all"
+                        >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                            </svg>
+                            Filters
+                            {% if selected_sources or selected_categories or date_filter %}
+                            <span class="inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-juno-green rounded-full">
+                                {{ selected_sources|length|add:selected_categories|length|add:1 }}
+                            </span>
+                            {% endif %}
+                        </button>
+                    </div>
+
+                    <!-- Mobile Filters Panel (Hidden by default) -->
+                    <div id="mobile-filters" class="hidden lg:hidden mb-6">
+                        {% include "rss/filters.html" %}
+                    </div>
+
                     <!-- Results Header -->
                     <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
                         <div class="flex justify-between items-center">
@@ -54,82 +82,82 @@
 
                 <!-- Modern Job Cards with Animations -->
                 {% if hits %}
-                <div class="space-y-6">
+                <div class="space-y-4">
                     {% for hit in hits %}
-                    <div class="job-card group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-transparent hover:border-juno-green/30">
-                        <!-- Gradient Overlay on Hover -->
-                        <div class="absolute inset-0 bg-gradient-to-r from-juno-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <article class="job-card group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-juno-green/40">
+                        <!-- Gradient Accent Bar -->
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-juno-green to-juno-amber transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div>
 
                         <a href="/job/{{ hit.title|slugify }}/?id={{ hit.meta.id|urlencode }}&q={{ q }}"
-                           class="block p-6 md:p-8 hover:no-underline relative z-10">
-                            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                                <!-- Title and Badges -->
-                                <div class="flex-1">
-                                    <div class="flex items-start gap-3 mb-3">
-                                        <!-- Icon Circle -->
-                                        <div class="w-12 h-12 bg-gradient-to-br from-juno-green to-green-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-500 shrink-0">
-                                            💼
-                                        </div>
-                                        <div class="flex-1">
-                                            <h3 class="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-juno-green transition-colors leading-tight mb-2">
-                                                {{ hit.title }}
-                                            </h3>
-                                            <div class="flex items-center gap-2 flex-wrap">
-                                                {% if hit.pubDate|timesince < "1 day" %}
-                                                <span class="inline-flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full text-xs font-bold shadow-sm animate-pulse">
-                                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                                    </svg>
-                                                    NEW
-                                                </span>
-                                                {% endif %}
-                                                <span class="text-sm text-gray-500 flex items-center gap-1">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                                    </svg>
-                                                    {{ hit.pubDate|date:"M d, Y" }}
-                                                </span>
-                                            </div>
-                                        </div>
+                           class="block p-5 md:p-6 hover:no-underline relative">
+                            <div class="flex items-start gap-4">
+                                <!-- Company Icon -->
+                                <div class="shrink-0 w-12 h-12 bg-gradient-to-br from-juno-green/10 to-juno-green/5 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-juno-green/20">
+                                    <svg class="w-6 h-6 text-juno-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+
+                                <!-- Content -->
+                                <div class="flex-1 min-w-0">
+                                    <!-- Title -->
+                                    <h3 class="text-lg md:text-xl font-bold text-gray-900 group-hover:text-juno-green transition-colors mb-2 leading-tight">
+                                        {{ hit.title }}
+                                    </h3>
+
+                                    <!-- Metadata -->
+                                    <div class="flex items-center gap-3 flex-wrap mb-3 text-sm text-gray-600">
+                                        {% if hit.source %}
+                                        <span class="inline-flex items-center gap-1.5 font-medium">
+                                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                                            </svg>
+                                            {{ hit.source }}
+                                        </span>
+                                        {% endif %}
+                                        <span class="text-gray-300">•</span>
+                                        <span class="inline-flex items-center gap-1.5">
+                                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            {{ hit.pubDate|date:"M d, Y" }}
+                                        </span>
+                                        {% if hit.pubDate|timesince < "1 day" %}
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-semibold">
+                                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                            </svg>
+                                            NEW
+                                        </span>
+                                        {% endif %}
+                                    </div>
+
+                                    <!-- Description -->
+                                    <p class="text-sm text-gray-600 leading-relaxed mb-3 line-clamp-2">
+                                        {{ hit.body|striptags|truncatechars:180 }}
+                                    </p>
+
+                                    <!-- Tags -->
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        {% if hit.category %}
+                                        <span class="inline-flex items-center px-2.5 py-1 bg-juno-amber/10 text-amber-700 rounded text-xs font-medium border border-juno-amber/20">
+                                            {{ hit.category }}
+                                        </span>
+                                        {% endif %}
                                     </div>
                                 </div>
 
                                 <!-- Arrow Icon -->
-                                <div class="hidden md:block shrink-0">
-                                    <div class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-juno-green flex items-center justify-center transition-all duration-300">
-                                        <svg class="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                <div class="shrink-0 self-center">
+                                    <div class="w-8 h-8 rounded-full bg-gray-50 group-hover:bg-juno-green flex items-center justify-center transition-all duration-300">
+                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-white group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Description -->
-                            <p class="text-gray-600 leading-relaxed mb-4 line-clamp-2">
-                                {{ hit.body|striptags|truncatechars:200 }}
-                            </p>
-
-                            <!-- Tags -->
-                            <div class="flex items-center gap-2 flex-wrap">
-                                {% if hit.source %}
-                                <span class="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-juno-green/10 to-green-600/10 text-juno-green rounded-full text-sm font-semibold border border-juno-green/20 hover:border-juno-green/40 transition-colors">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                                    </svg>
-                                    {{ hit.source }}
-                                </span>
-                                {% endif %}
-                                {% if hit.category %}
-                                <span class="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-juno-amber/10 to-amber-600/10 text-amber-700 rounded-full text-sm font-semibold border border-juno-amber/20 hover:border-juno-amber/40 transition-colors">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
-                                    </svg>
-                                    {{ hit.category }}
-                                </span>
-                                {% endif %}
-                            </div>
                         </a>
-                    </div>
+                    </article>
                     {% endfor %}
                 </div>
 
@@ -186,8 +214,8 @@
                     {% include "rss/pagination.html" %}
                 </div>
                 {% endif %}
+                </div>
             </div>
         </div>
-    </div>
     </main>
 {% endblock %}
