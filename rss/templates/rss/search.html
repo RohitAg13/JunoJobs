@@ -6,7 +6,7 @@
 {% block content %}
     <main role="main" class="bg-gray-50 min-h-screen">
         <!-- Modern Search Header -->
-        <div class="relative bg-gradient-to-br from-juno-navy via-blue-900 to-juno-navy text-white py-16 overflow-hidden">
+        <div class="relative bg-gradient-to-br from-juno-navy via-blue-900 to-juno-navy text-white py-8 sm:py-12 md:py-16 overflow-hidden">
             <!-- Animated Background -->
             <div class="absolute inset-0">
                 <div class="absolute top-0 left-1/4 w-64 h-64 bg-juno-green/20 rounded-full blur-3xl"></div>
@@ -14,8 +14,8 @@
             </div>
 
             <div class="container-custom relative z-10">
-                <div class="max-w-4xl mx-auto space-y-6 text-center">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                <div class="max-w-4xl mx-auto space-y-4 sm:space-y-6 text-center px-4 sm:px-0">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">
                         {% if q %}
                             <span class="text-juno-amber">"{{ q }}"</span> Jobs
                         {% else %}
@@ -28,9 +28,9 @@
         </div>
 
         <!-- Main Content -->
-        <div class="container-custom py-8">
+        <div class="container-custom py-4 sm:py-6 md:py-8 px-4 sm:px-6">
             <!-- Two Column Layout: Filters + Results -->
-            <div class="grid lg:grid-cols-[300px_1fr] gap-8">
+            <div class="grid lg:grid-cols-[300px_1fr] gap-4 sm:gap-6 lg:gap-8">
                 <!-- Filters Sidebar (Desktop) -->
                 <aside class="hidden lg:block">
                     {% include "rss/filters.html" %}
@@ -62,13 +62,13 @@
                     </div>
 
                     <!-- Results Header -->
-                    <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
-                        <div class="flex justify-between items-center">
+                    <div class="bg-white rounded-lg shadow-sm p-3 sm:p-4 mb-4 sm:mb-6">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
                             <div>
-                                <h2 class="text-xl font-bold text-gray-900">
+                                <h2 class="text-lg sm:text-xl font-bold text-gray-900">
                                     {{ total_hits|default:"0" }} job{{ total_hits|pluralize }} found
                                 </h2>
-                                <p class="text-sm text-gray-600 mt-1">
+                                <p class="text-xs sm:text-sm text-gray-600 mt-0.5 sm:mt-1">
                                     {% if q %}Search results for "{{ q }}"{% else %}Browse all jobs{% endif %}
                                 </p>
                             </div>
@@ -89,11 +89,11 @@
                         <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-juno-green via-green-500 to-juno-amber transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div>
 
                         <a href="/job/{{ hit.title|slugify }}/?id={{ hit.meta.id|urlencode }}&q={{ q }}"
-                           class="block p-5 md:p-6 hover:no-underline relative">
-                            <div class="flex items-start gap-4">
+                           class="block p-3 sm:p-4 md:p-6 hover:no-underline relative">
+                            <div class="flex items-start gap-2 sm:gap-3 md:gap-4">
                                 <!-- Company Icon -->
-                                <div class="shrink-0 w-14 h-14 bg-gradient-to-br from-juno-green/15 to-juno-green/5 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 border border-juno-green/30 shadow-sm group-hover:shadow-md">
-                                    <svg class="w-7 h-7 text-juno-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="shrink-0 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-juno-green/15 to-juno-green/5 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 border border-juno-green/30 shadow-sm group-hover:shadow-md">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-juno-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                     </svg>
                                 </div>
@@ -101,23 +101,23 @@
                                 <!-- Content -->
                                 <div class="flex-1 min-w-0">
                                     <!-- Title -->
-                                    <h3 class="text-lg md:text-xl font-bold text-gray-900 group-hover:text-juno-green transition-colors mb-2.5 leading-tight">
+                                    <h3 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 group-hover:text-juno-green transition-colors mb-2 sm:mb-2.5 leading-tight">
                                         {{ hit.title }}
                                     </h3>
 
                                     <!-- Metadata -->
-                                    <div class="flex items-center gap-3 flex-wrap mb-3 text-sm text-gray-600">
+                                    <div class="flex items-center gap-1.5 sm:gap-2 md:gap-3 flex-wrap mb-2 sm:mb-3 text-xs sm:text-sm text-gray-600">
                                         {% if hit.source %}
-                                        <span class="inline-flex items-center gap-1.5 font-medium">
-                                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <span class="inline-flex items-center gap-1 sm:gap-1.5 font-medium">
+                                            <svg class="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                                             </svg>
                                             {{ hit.source }}
                                         </span>
                                         {% endif %}
-                                        <span class="text-gray-300">•</span>
-                                        <span class="inline-flex items-center gap-1.5">
-                                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <span class="text-gray-300 hidden sm:inline">•</span>
+                                        <span class="inline-flex items-center gap-1 sm:gap-1.5">
+                                            <svg class="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                             </svg>
                                             {{ hit.pubDate|date:"M d, Y" }}
@@ -133,7 +133,7 @@
                                     </div>
 
                                     <!-- Description -->
-                                    <p class="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-2">
+                                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-2 sm:mb-3 md:mb-4 line-clamp-2">
                                         {{ hit.body|striptags|truncatechars:200 }}
                                     </p>
 
@@ -148,9 +148,9 @@
                                 </div>
 
                                 <!-- Arrow Icon -->
-                                <div class="shrink-0 self-center">
-                                    <div class="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-juno-green flex items-center justify-center transition-all duration-300 shadow-sm group-hover:shadow-md">
-                                        <svg class="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="shrink-0 self-center hidden sm:block">
+                                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 group-hover:bg-juno-green flex items-center justify-center transition-all duration-300 shadow-sm group-hover:shadow-md">
+                                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
                                         </svg>
                                     </div>
@@ -184,24 +184,24 @@
                     .job-card:nth-child(5) { animation-delay: 0.25s; }
                 </style>
                 {% else %}
-                <div class="bg-white rounded-lg p-12 text-center shadow-sm">
-                    <div class="text-6xl mb-4">🔍</div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">No jobs found</h3>
-                    <p class="text-gray-600 mb-6 max-w-md mx-auto">
+                <div class="bg-white rounded-lg p-6 sm:p-8 md:p-12 text-center shadow-sm">
+                    <div class="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">🔍</div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">No jobs found</h3>
+                    <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 max-w-md mx-auto px-4 sm:px-0">
                         {% if q %}
                         We couldn't find any jobs matching "{{ q }}". Try adjusting your search or filters to find what you're looking for.
                         {% else %}
                         Try searching for specific skills, locations, or job titles.
                         {% endif %}
                     </p>
-                    <div class="flex gap-3 justify-center">
-                        <a href="/search/" class="inline-flex items-center gap-2 px-6 py-3 bg-juno-green text-white rounded-full font-semibold hover:bg-green-600 transition-all shadow-sm hover:shadow-md">
+                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center px-4 sm:px-0">
+                        <a href="/search/" class="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-juno-green text-white rounded-full font-semibold hover:bg-green-600 transition-all shadow-sm hover:shadow-md text-sm sm:text-base">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                             </svg>
                             Clear Filters
                         </a>
-                        <a href="/jobs/" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-700 border-2 border-gray-200 rounded-full font-semibold hover:border-juno-green hover:text-juno-green transition-all">
+                        <a href="/jobs/" class="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-white text-gray-700 border-2 border-gray-200 rounded-full font-semibold hover:border-juno-green hover:text-juno-green transition-all text-sm sm:text-base">
                             Browse All Jobs
                         </a>
                     </div>

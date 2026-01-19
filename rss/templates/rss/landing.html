@@ -6,7 +6,7 @@
 
 {% block content %}
 <!-- Hero Section with Modern Design -->
-<section class="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50">
+<section class="relative min-h-[auto] md:min-h-[70vh] lg:min-h-[85vh] flex items-center overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50">
   <!-- Animated Background Elements -->
   <div class="absolute inset-0 overflow-hidden">
     <div class="absolute top-20 left-10 w-72 h-72 bg-juno-green/10 rounded-full blur-3xl animate-pulse"></div>
@@ -17,7 +17,7 @@
   <!-- Grid Pattern Overlay -->
   <div class="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_60%,transparent_100%)] opacity-40"></div>
 
-  <div class="container-custom relative z-10 py-20">
+  <div class="container-custom relative z-10 py-12 md:py-16 lg:py-20">
     <div class="grid lg:grid-cols-2 gap-16 items-center">
       <!-- Left Content -->
       <div class="space-y-8 animate-fade-in">
@@ -28,7 +28,7 @@
         </div>
 
         <!-- Heading -->
-        <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
           <span class="bg-gradient-to-r from-gray-900 via-juno-navy to-gray-900 bg-clip-text text-transparent">
             Tech Jobs.
           </span>
@@ -39,13 +39,13 @@
         </h1>
 
         <!-- Subtitle -->
-        <p class="text-xl text-gray-600 max-w-xl leading-relaxed">
+        <p class="text-lg sm:text-xl text-gray-600 max-w-xl leading-relaxed">
           Search thousands of opportunities from top tech companies and job boards. Updated every 24 hours.
         </p>
 
         <!-- Enhanced Search Box -->
         <form action="/search/" method="get" class="relative group">
-          <div class="relative flex items-center gap-2 p-2 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-transparent group-hover:border-juno-green/20">
+          <div class="relative flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-2 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-transparent group-hover:border-juno-green/20">
             <div class="flex-1 relative">
               <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -54,12 +54,12 @@
                 type="text"
                 name="q"
                 placeholder="Job title, keywords, or company..."
-                class="w-full px-12 py-4 text-gray-900 placeholder-gray-400 bg-transparent focus:outline-none text-lg"
+                class="w-full px-12 py-4 text-gray-900 placeholder-gray-400 bg-transparent focus:outline-none text-base sm:text-lg"
               />
             </div>
-            <button type="submit" class="px-8 py-4 bg-gradient-to-r from-juno-green to-green-600 text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300 whitespace-nowrap">
-              Search Jobs
-              <svg class="inline-block ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button type="submit" class="px-6 sm:px-8 py-4 bg-gradient-to-r from-juno-green to-green-600 text-white font-bold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300 whitespace-nowrap flex items-center justify-center gap-2">
+              <span>Search Jobs</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </button>
@@ -385,9 +385,9 @@
         {{ count|default:"17,000+" }} opportunities waiting for you
       </p>
 
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-        <a href="/jobs/" class="group relative px-10 py-5 bg-gradient-to-r from-juno-amber to-yellow-400 text-juno-navy rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden">
-          <span class="relative z-10 flex items-center gap-2">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center pt-4 px-4 sm:px-0">
+        <a href="/jobs/" class="group relative px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-juno-amber to-yellow-400 text-juno-navy rounded-2xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden text-center">
+          <span class="relative z-10 flex items-center justify-center gap-2">
             Browse All Jobs
             <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -395,8 +395,8 @@
           </span>
         </a>
 
-        <a href="/search/" class="group relative px-10 py-5 bg-white text-juno-navy rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden">
-          <span class="relative z-10 flex items-center gap-2">
+        <a href="/search/" class="group relative px-8 sm:px-10 py-4 sm:py-5 bg-white text-juno-navy rounded-2xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden text-center">
+          <span class="relative z-10 flex items-center justify-center gap-2">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -406,24 +406,24 @@
       </div>
 
       <!-- Stats with Enhanced Visual Design -->
-      <div class="grid grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto pt-12">
-        <div class="group text-center p-4 md:p-6 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 hover:bg-opacity-15 hover:border-juno-amber hover:border-opacity-40 transition-all duration-300 hover:scale-105">
-          <div class="text-2xl md:text-4xl font-extrabold text-juno-amber mb-1 md:mb-2 group-hover:scale-110 transition-transform">
+      <div class="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 max-w-3xl mx-auto pt-12 px-4 sm:px-0">
+        <div class="group text-center p-3 sm:p-4 md:p-6 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 hover:bg-opacity-15 hover:border-juno-amber hover:border-opacity-40 transition-all duration-300 hover:scale-105">
+          <div class="text-xl sm:text-2xl md:text-4xl font-extrabold text-juno-amber mb-1 md:mb-2 group-hover:scale-110 transition-transform">
             {{ count|default:"17,000+" }}
           </div>
-          <div class="text-gray-300 text-xs md:text-sm font-medium">Active Jobs</div>
+          <div class="text-gray-300 text-[10px] sm:text-xs md:text-sm font-medium">Active Jobs</div>
         </div>
-        <div class="group text-center p-4 md:p-6 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 hover:bg-opacity-15 hover:border-juno-amber hover:border-opacity-40 transition-all duration-300 hover:scale-105">
-          <div class="text-2xl md:text-4xl font-extrabold text-juno-amber mb-1 md:mb-2 group-hover:scale-110 transition-transform">
+        <div class="group text-center p-3 sm:p-4 md:p-6 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 hover:bg-opacity-15 hover:border-juno-amber hover:border-opacity-40 transition-all duration-300 hover:scale-105">
+          <div class="text-xl sm:text-2xl md:text-4xl font-extrabold text-juno-amber mb-1 md:mb-2 group-hover:scale-110 transition-transform">
             50+
           </div>
-          <div class="text-gray-300 text-xs md:text-sm font-medium">Job Sources</div>
+          <div class="text-gray-300 text-[10px] sm:text-xs md:text-sm font-medium">Job Sources</div>
         </div>
-        <div class="group text-center p-4 md:p-6 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 hover:bg-opacity-15 hover:border-juno-amber hover:border-opacity-40 transition-all duration-300 hover:scale-105">
-          <div class="text-2xl md:text-4xl font-extrabold text-juno-amber mb-1 md:mb-2 group-hover:scale-110 transition-transform">
+        <div class="group text-center p-3 sm:p-4 md:p-6 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 hover:bg-opacity-15 hover:border-juno-amber hover:border-opacity-40 transition-all duration-300 hover:scale-105">
+          <div class="text-xl sm:text-2xl md:text-4xl font-extrabold text-juno-amber mb-1 md:mb-2 group-hover:scale-110 transition-transform">
             Daily
           </div>
-          <div class="text-gray-300 text-xs md:text-sm font-medium">Updates</div>
+          <div class="text-gray-300 text-[10px] sm:text-xs md:text-sm font-medium">Updates</div>
         </div>
       </div>
     </div>
