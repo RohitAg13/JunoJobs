@@ -79,11 +79,9 @@ TEMPLATES = [
 WSGI_APPLICATION = "dj.wsgi.application"
 
 # Database
+# Reads DATABASE_URL (e.g. postgres://...) when present, falls back to SQLite for local dev.
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": str(env("DJANGO_DB_NAME", default=BASE_DIR / "db.sqlite3")),
-    }
+    "default": env.db(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
 }
 
 # Password validation
@@ -116,9 +114,14 @@ DEV_STATIC = BASE_DIR / "static"
 STATICFILES_DIRS = [DEV_STATIC]
 
 # Elasticsearch configuration
+# Prefer ELASTICSEARCH_URL (full URL incl. auth, e.g. https://user:pass@cluster.bonsaisearch.net),
+# fall back to legacy HOST:PORT pair for local Docker compose.
 ELASTICSEARCH_DSL = {
     "default": {
-        "hosts": f"{env('ELASTICSEARCH_HOST', default='elasticsearch')}:{env('ELASTICSEARCH_PORT', default='9200')}"
+        "hosts": env(
+            "ELASTICSEARCH_URL",
+            default=f"http://{env('ELASTICSEARCH_HOST', default='elasticsearch')}:{env('ELASTICSEARCH_PORT', default='9200')}",
+        )
     }
 }
 
@@ -132,8 +135,8 @@ if DEBUG:
 else:
     CACHES = {
         "default": {
-            "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
-            "LOCATION": f"{env('MEMCACHED_HOST', default='127.0.0.1')}:{env('MEMCACHED_PORT', default='11211')}",
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "junojobs",
         }
     }
 

@@ -22,4 +22,12 @@ COPY . /code/
 # Build Tailwind CSS
 RUN npm run build:css
 
-# Collect static files will be done at runtime via entrypoint script
+# Migrations + collectstatic + gunicorn. Railway sets $PORT.
+CMD sh -c "python manage.py migrate --noinput && \
+  python manage.py collectstatic --noinput && \
+  gunicorn dj.wsgi:application \
+    --bind 0.0.0.0:${PORT:-8000} \
+    --workers ${WEB_CONCURRENCY:-3} \
+    --timeout 120 \
+    --access-logfile - \
+    --error-logfile -"
