@@ -1,15 +1,16 @@
 {% load static %}
+{% if hit.title and hit.body %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
   "@type": "JobPosting",
   "title": "{{ hit.title }}",
   "description": "{{ hit.body|striptags|truncatechars:5000 }}",
-  "datePosted": "{{ hit.pubDate|date:'Y-m-d' }}",
+  {% if hit.pubDate %}"datePosted": "{{ hit.pubDate|date:'Y-m-d' }}",{% endif %}
   "hiringOrganization": {
     "@type": "Organization",
-    "name": "{{ hit.source }}",
-    "sameAs": "{{ hit.link }}"
+    "name": "{{ hit.source|default:'Company' }}",
+    "sameAs": "{{ hit.link|default:'#' }}"
   },
   "jobLocation": {
     "@type": "Place",
@@ -22,3 +23,4 @@
   "url": "{{ request.build_absolute_uri }}"
 }
 </script>
+{% endif %}
