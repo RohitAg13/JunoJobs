@@ -5,21 +5,23 @@ const es = require("./es-client");
 
 async function deleteOld(maxAgeDays) {
   const days = parseInt(maxAgeDays || process.env.MAX_AGE_DAYS || "365", 10);
-  const response = await es.deleteByQuery({
-    index: "rss",
-    body: {
-      query: {
-        range: {
-          pubDate: {
-            lt: `now-${days}d/d`,
+  const response = await es.deleteByQuery(
+    {
+      index: "rss",
+      body: {
+        query: {
+          range: {
+            pubDate: {
+              lt: `now-${days}d/d`,
+            },
           },
         },
       },
+      refresh: true,
+      conflicts: "proceed",
     },
-    refresh: true,
-    conflicts: "proceed",
-    requestTimeout: 120000,
-  });
+    { requestTimeout: 120000 }
+  );
 
   const body = response.body || response;
   console.log(
