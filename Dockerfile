@@ -19,8 +19,11 @@ RUN npm install
 # Copy project files
 COPY . /code/
 
-# Build Tailwind CSS
+# Build Tailwind CSS (root package.json)
 RUN npm run build:css
+
+# Install ingest worker deps (node/package.json) for ROLE=cron
+RUN cd /code/node && npm install --omit=dev
 
 # Two roles:
 #   ROLE=web (default): migrate + collectstatic + gunicorn on $PORT
