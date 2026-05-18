@@ -6,6 +6,8 @@
     "rss-parser": "^3.6.2"
   },
   "scripts": {
-    "ingest": "node ingest.js"
+    "ingest": "node ingest.js",
+    "delete-old": "node delete-old.js",
+    "daily": "node ingest.js && node delete-old.js"
   }
 }
