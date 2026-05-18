@@ -35,9 +35,15 @@ async function sendToElastic(doc) {
       const status = (err && err.meta && err.meta.statusCode) || err.statusCode;
       if (status === 409) {
         // already created, ignore
-      } else {
-        console.error(err && err.message ? err.message : err);
+        return;
       }
+      const respBody = err && err.meta && err.meta.body;
+      console.error(
+        "create failed:",
+        status,
+        err.message,
+        respBody ? JSON.stringify(respBody).slice(0, 400) : ""
+      );
     });
 }
 
