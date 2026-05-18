@@ -6,7 +6,7 @@ let es = require("./es-client");
 const maxAgeDays = parseInt(process.env.MAX_AGE_DAYS || "365", 10);
 
 async function main() {
-  const result = await es.deleteByQuery({
+  const response = await es.deleteByQuery({
     index: "rss",
     body: {
       query: {
@@ -22,8 +22,9 @@ async function main() {
     requestTimeout: 120000,
   });
 
+  const body = response.body || response;
   console.log(
-    `delete-old: removed ${result.deleted || 0} docs older than ${maxAgeDays} days (took ${result.took}ms, failures=${(result.failures || []).length})`
+    `delete-old: removed ${body.deleted || 0} docs older than ${maxAgeDays} days (took ${body.took}ms, failures=${(body.failures || []).length})`
   );
 }
 

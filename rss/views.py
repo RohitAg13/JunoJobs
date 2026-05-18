@@ -34,15 +34,17 @@ def create_index_if_not_exists(index_name):
 
 import os
 
-es_host = os.getenv("ELASTICSEARCH_HOST", "localhost")
-es_port = os.getenv("ELASTICSEARCH_PORT", "9200")
+# Prefer ELASTICSEARCH_URL (full URL incl. auth), fall back to HOST:PORT.
+es_url = os.getenv("ELASTICSEARCH_URL") or "http://{host}:{port}".format(
+    host=os.getenv("ELASTICSEARCH_HOST", "localhost"),
+    port=os.getenv("ELASTICSEARCH_PORT", "9200"),
+)
 
-# Create ES connection with error handling
 try:
-    connections.create_connection(hosts=[f"{es_host}:{es_port}"], timeout=5)
+    connections.create_connection(hosts=[es_url], timeout=10, retry_on_timeout=True)
     create_index_if_not_exists("rss")
 except Exception as e:
-    print(f"Warning: Could not connect to Elasticsearch at {es_host}:{es_port}")
+    print(f"Warning: Could not connect to Elasticsearch at {es_url}")
     print(f"Error: {e}")
     print("Server will start but search functionality will be limited.")
 

@@ -1,20 +1,23 @@
-let express = require('express');
-let app = express();
-let es = require('./es-client');
+const express = require("express");
+const es = require("./es-client");
 
-app.get('/search/:q', function (req, res, next) {
-    if(!req.params.q) {
-        return next("No q param");
-    }
+const app = express();
 
-    let esParams = {
-        index: 'rss',
-        q: req.params.q
-    };
-    es.search(esParams, (err, esRes) => {
-        // console.log(err, esRes)
-        res.send(esRes);
+app.get("/search/:q", async (req, res, next) => {
+  if (!req.params.q) {
+    return next("No q param");
+  }
+  try {
+    const result = await es.search({
+      index: "rss",
+      q: req.params.q,
     });
+    res.send(result.body || result);
+  } catch (err) {
+    next(err);
+  }
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+  console.log("elastic-proxy listening on :3000");
+});

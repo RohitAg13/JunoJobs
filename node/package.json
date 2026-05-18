@@ -1,7 +1,7 @@
 {
   "dependencies": {
+    "@elastic/elasticsearch": "^7.17.0",
     "croner": "^7.0.1",
-    "elasticsearch": "^15.3.1",
     "request": "^2.88.0",
     "rss-parser": "^3.6.2"
   },

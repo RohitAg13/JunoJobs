@@ -27,15 +27,15 @@ async function sendToElastic(doc) {
   return es
     .create({
       index: "rss",
-      type: "item",
       id: doc.link,
       body: doc,
     })
     .catch((err) => {
-      if (err.status === 409) {
-        // console.log("already created");
+      const status = (err && err.meta && err.meta.statusCode) || err.statusCode;
+      if (status === 409) {
+        // already created, ignore
       } else {
-        console.error(err);
+        console.error(err && err.message ? err.message : err);
       }
     });
 }
