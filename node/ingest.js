@@ -10,6 +10,7 @@ function getRandomUserAgent() {
 }
 let httpreq = require("./httpreq");
 const { Cron } = require("croner");
+const { deleteOld } = require("./delete-old");
 
 let rss = new RssParser();
 
@@ -98,6 +99,13 @@ async function main() {
   } catch (error) {
     console.error("Error processing sources:", error);
   }
+  // After ingest, prune docs older than MAX_AGE_DAYS to stay under ES quota.
+  try {
+    await deleteOld();
+  } catch (err) {
+    console.error("delete-old after ingest failed:", err && err.message ? err.message : err);
+  }
+
   let r = await httpreq(
     "https://hc-ping.com/b2a17a45-f7fe-4d11-ae8a-35b87a0fd4ee"
   ).catch((err) => {

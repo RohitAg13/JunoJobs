@@ -22,12 +22,20 @@ COPY . /code/
 # Build Tailwind CSS
 RUN npm run build:css
 
-# Migrations + collectstatic + gunicorn. Railway sets $PORT.
-CMD sh -c "python manage.py migrate --noinput && \
-  python manage.py collectstatic --noinput && \
-  gunicorn dj.wsgi:application \
-    --bind 0.0.0.0:${PORT:-8000} \
-    --workers ${WEB_CONCURRENCY:-3} \
-    --timeout 120 \
-    --access-logfile - \
-    --error-logfile -"
+# Two roles:
+#   ROLE=web (default): migrate + collectstatic + gunicorn on $PORT
+#   ROLE=cron        : long-running node process; runs main() now and via internal croner daily at 00:00 UTC
+CMD sh -c '\
+  if [ "$ROLE" = "cron" ]; then \
+    echo "Starting cron role"; \
+    cd /code/node && exec node ingest.js; \
+  else \
+    python manage.py migrate --noinput && \
+    python manage.py collectstatic --noinput && \
+    exec gunicorn dj.wsgi:application \
+      --bind 0.0.0.0:${PORT:-8000} \
+      --workers ${WEB_CONCURRENCY:-3} \
+      --timeout 120 \
+      --access-logfile - \
+      --error-logfile -; \
+  fi'
